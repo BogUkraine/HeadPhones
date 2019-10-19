@@ -10,6 +10,7 @@ main {
 .main-header {
     display: flex;
     flex-flow: row nowrap;
+    width: 100%;
 }
 
 .main-header > div > img{
