@@ -1,0 +1,16 @@
+.home__right {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+    &_img {
+        width: 500px;
+        height: 500px;
+    }
+
+    &_quote {
+        display: flex;
+        margin: 0 15px 100px 15px;
+    }
+}

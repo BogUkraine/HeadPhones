@@ -3,6 +3,7 @@ import { BrowserRouter, NavLink } from 'react-router-dom';
 
 import Search from './Search';
 import Nav from './Nav';
+import Username from './Username';
 
 import logo from '../../images/logo.png';
 
@@ -15,9 +16,7 @@ const Header = () => {
             </div>
             <Nav />
             <Search />
-            <div className="header__username">
-                <span>User_name</span>
-            </div>
+            <Username />
         </header>
 	);
 }

@@ -1,0 +1,12 @@
+.home {
+    display: flex;
+    flex-wrap: nowrap;
+
+    &__left {
+        flex: 1;
+    }
+
+    &__right {
+        flex: 1;
+    }
+}
