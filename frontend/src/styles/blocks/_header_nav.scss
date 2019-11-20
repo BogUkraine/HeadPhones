@@ -1,0 +1,21 @@
+.header {
+
+    &__navigation {
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+        height: 55px;
+        padding: 0 5px;
+        margin: 5px 20px;
+        flex: 2;
+
+        & > a {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: 1 1;
+            min-width: 120px;
+        }
+    }
+}

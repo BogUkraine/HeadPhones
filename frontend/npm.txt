@@ -1,2 +1,4 @@
+npm install axios --save-dev
+
 when start programm:
 npm start

@@ -1,0 +1,19 @@
+body {
+    font-family: 'Century Gothic', 'Comic Sans MS';
+    font-size: 24px;
+    color: #313131;
+    background: linear-gradient(45deg, rgb(255, 229, 63), rgb(34, 211, 152));
+}
+
+a:link {
+    color: $black;
+    text-decoration: none;
+}
+
+a:visited {
+    color: $black;
+}
+
+a:active {
+    color: $black;
+}

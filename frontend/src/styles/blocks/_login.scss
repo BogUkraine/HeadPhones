@@ -1,0 +1,30 @@
+.login {
+    display: flex;
+    flex-wrap: nowrap;
+    height: 100vh;
+
+    &__left {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__right {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.left {
+
+    &__logo {
+
+        &_image {
+            width: 300px;
+            height: 300px;
+        }
+    }
+}
