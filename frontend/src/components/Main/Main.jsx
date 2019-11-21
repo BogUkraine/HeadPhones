@@ -3,7 +3,7 @@ import { Route } from 'react-router-dom';
 
 import Home from "./Home/Home";
 import Library from "./Library/Library";
-import Playlist from "./Playlist";
+import Playlist from "./Playlist/Playlist";
 
 const Main = () => {
 	return (

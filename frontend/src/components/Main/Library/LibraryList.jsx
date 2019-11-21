@@ -13,8 +13,8 @@ const LibraryList = () => {
                 <span className="library__track_year">2019</span>
             </div>
             <div className="library__track_time">
-                <span className="">1:01</span>/
-                <span className="">3:30</span>
+                <span className="current_time">1:01</span>
+                <span className="whole_time">3:30</span>
             </div>
         </div>
     );

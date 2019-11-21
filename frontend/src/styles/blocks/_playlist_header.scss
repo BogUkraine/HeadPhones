@@ -1,0 +1,43 @@
+.header {
+
+    &__playlist_name {
+        width: 100%;
+    }
+
+    &__user_name {
+        font-size: 16px;
+        margin-right: 20px;
+    }
+
+    &__tracks {
+
+        &_count {
+            font-size: 16px;
+            margin-right: 20px;
+
+            &::before {
+                content: "";
+                border: 1px solid $black;
+                margin-right: 20px;
+            }
+        }
+
+        &_time {
+            font-size: 16px;
+            margin-right: 20px;
+
+            &::before {
+                content: "";
+                border: 1px solid $black;
+                margin-right: 20px;
+            }
+        }
+    }
+
+    &__buttons {
+
+        &_shuffle {
+            margin-right: 10px;
+        }
+    }
+}
