@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import LibraryInner from './LibraryInner';
 import AsiderLeft from './AsiderLeft';

@@ -23,11 +23,31 @@
 
     &_name {
         width: 100%;
-        font-size: 16px;
+        font-size: $text-size-normal;
     }
 
     &_wrapper {
-        font-size: 14px;
+        font-size: $text-size-smallest;
+    }
+
+    &_year {
+        margin-left: 20px;
+
+        &:before {
+            content: "";
+            border: 1px solid $black;
+            margin-right: 20px;
+        }
+    }
+
+    &_album {
+        margin-left: 20px;
+
+        &:before {
+            content: "";
+            border: 1px solid $black;
+            margin-right: 20px;
+        }
     }
 
     &:hover {

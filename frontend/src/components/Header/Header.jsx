@@ -1,5 +1,4 @@
 import React from 'react';
-import { BrowserRouter, NavLink } from 'react-router-dom';
 
 import Search from './Search';
 import Nav from './Nav';

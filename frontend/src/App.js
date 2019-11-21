@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, NavLink, Route } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 
 import './styles/main.scss';
 

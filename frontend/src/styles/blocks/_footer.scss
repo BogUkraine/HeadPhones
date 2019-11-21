@@ -1,0 +1,9 @@
+.footer {
+    display: flex;
+    width: 100%;
+    height: $footer-height;
+
+    &__audio {
+        height: 50px;
+    }
+}
