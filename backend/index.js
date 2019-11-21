@@ -30,13 +30,54 @@ app.get("/tracks", function(req, res){
 });
 
 app.get("/users", function(req, res){
-  pool.query("SELECT * FROM t_user", function(err, data) {
-    if(err) {
-        return console.log(err);
-    }
-    res.json(data);
-    console.log(data);
-  });
+	pool.query("SELECT * FROM t_user", function(err, data) {
+		if(err) {
+			return console.log(err);
+		}
+		res.json(data);
+		console.log(data);
+	});
+});
+
+
+app.get("/albums", function(req, res){
+	pool.query("SELECT * FROM album", function(err, data) {
+		if(err) {
+			return console.log(err);
+		}
+		res.json(data);
+		console.log(data);
+	});
+});
+
+app.get("/genres", function(req, res){
+	pool.query("SELECT * FROM genre", function(err, data) {
+		if(err) {
+			return console.log(err);
+		}
+		res.json(data);
+		console.log(data);
+	});
+});
+
+app.get("/playlists", function(req, res){
+	pool.query("SELECT * FROM t_playlist", function(err, data) {
+		if(err) {
+			return console.log(err);
+		}
+		res.json(data);
+		console.log(data);
+	});
+});
+
+app.get("/singers", function(req, res){
+	pool.query("SELECT * FROM singer", function(err, data) {
+		if(err) {
+			return console.log(err);
+		}
+		res.json(data);
+		console.log(data);
+	});
 });
 
 app.listen(port);

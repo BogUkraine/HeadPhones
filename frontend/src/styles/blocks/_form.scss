@@ -7,13 +7,13 @@
     background: rgba(255,255,255,0.3);
 
     &__enter {
-        display: none;
+        display: flex;
         flex-wrap: wrap;
         justify-content: center;
     }
 
     &__create {
-        display: flex;
+        display: none;
         flex-wrap: wrap;
         justify-content: center;
     }
