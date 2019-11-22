@@ -11,14 +11,18 @@ class ButtonsEnter extends Component {
 
     handleClick(event) {
 
-        for(let i = 0; i < this.props.userInfo.length; i++) {
-            if((this.props.login === this.props.userInfo[i].user_login) && (this.props.pass === this.props.userInfo[i].user_password)){
+        let isExist = false;
+
+        for(let i = 0; i < this.props.users.length; i++) {
+            if((this.props.login === this.props.users[i].user_login) && (this.props.pass === this.props.users[i].user_password)){
+                isExist = true;
                 break;
             }
-            else {
-                event.preventDefault();
-                alert("Wrong password or login");
-            }
+        }
+
+        if(!isExist) {
+            event.preventDefault();
+            alert("Wrong password or login");
         }
     }
 

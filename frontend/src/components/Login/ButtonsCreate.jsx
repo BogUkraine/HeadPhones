@@ -13,7 +13,6 @@ class ButtonsCreate extends Component {
     }
 
     handleClick(event) {
-        console.log("this.props.users.password", this.props.users);
 
         let isLogin = false;
 
@@ -50,7 +49,7 @@ class ButtonsCreate extends Component {
         return (
             <div className="form__buttons">
                 <button className="form__buttons_back button" value="Back" id="toLogin">Back to login</button>
-                <NavLink to="/login">
+                <NavLink to="/home">
                     <button
                         className="form__buttons_enter button"
                         value="Create"

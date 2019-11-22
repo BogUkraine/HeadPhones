@@ -34,7 +34,7 @@ class Form extends Component {
                 this.setState({
                     users: response.data,
                 });
-                //console.log(this.state.users);
+                console.log(this.state.users);
             })
             .catch(function (error) {
                 console.log(error);
@@ -62,28 +62,15 @@ class Form extends Component {
         <div className="login__right">
             <form className="form__enter form" id="formLogin">
                 <h2 className="form__title">Login to account</h2>
-                    <label className="form__login form__label">
-                    <span className="form__description">Login:</span>
-                    <input
-                    className="form__login_field field"
-                    type="text"
-                    id="loginEnter"
-                    onChange={this.onChangeLogin}
+
+                    <LoginField funcChange={this.onChangeLogin}/>
+                    <PasswordField funcChange={this.onChangePass}/>
+
+                    <ButtonsEnter
+                        login={this.state.inputLogin}
+                        pass={this.state.inputPass}
+                        users={this.state.users}
                     />
-                    </label>
-                        <label className="form__password form__label">
-                        <span className="form__description">Password:</span>
-                        <input
-                        className="form__password_field field"
-                        type="password"
-                        onChange={this.onChangePass}
-                        />
-                        </label>
-                <ButtonsEnter
-                    login={this.state.inputLogin}
-                    pass={this.state.inputPass}
-                    userInfo={this.state.users}
-                />
             </form>
             <form className="form__create form" id="formCreate">
                 <h2 className="form__title">Create account</h2>
