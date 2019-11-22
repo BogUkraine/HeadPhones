@@ -5,7 +5,7 @@ const PasswordField = () => {
         <label className="form__password form__label">
             <span className="form__description">Password:</span>
             <input
-            className="form__password_field"
+            className="form__password_field button"
             type="password"
             />
         </label>

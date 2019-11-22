@@ -11,11 +11,6 @@ class Login extends Component {
         const formCreate = document.getElementById('formCreate');
         const formLogin = document.getElementById('formLogin');
 
-        const LoginFieldEnter = document.getElementById('loginEnter');
-        const PassFieldEnter = document.getElementById('passEnter');
-        const LoginFieldCreate = document.getElementById('loginCreate');
-        const PassFieldCreate = document.getElementById('passCreate');
-
         btnToCreate.addEventListener("click", (event) => {
             event.preventDefault();
             formCreate.style.display = "flex";

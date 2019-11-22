@@ -2,11 +2,14 @@ import React from 'react';
 
 import HomeTrack from './HomeTrack';
 
-const ArrayTracks = ( ({array}) => {
+const ArrayTracks = ( ({arrayTracks}) => {
     return (
-        array.map(( value ) => {
+        arrayTracks.map(( value ) => {
             return (
-                <HomeTrack track_name={value.track_name}/>
+                <HomeTrack
+                    track_name={value.track_name}
+                    key={value.id}
+                />
             );
         })
     );

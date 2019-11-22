@@ -3,10 +3,8 @@ var app = express();
 const port = process.env.PORT || 3210;
 const cors = require('cors');
 
-const fs = require('fs');
 const bodyParser = require("body-parser");
 const urlencodedParser = bodyParser.urlencoded({extended: false});
-const path = require('path');
 
 const mysql = require('mysql2');
 const pool = mysql.createPool({
@@ -18,6 +16,8 @@ const pool = mysql.createPool({
 });
 
 app.use(cors());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.get("/tracks", function(req, res){
     pool.query("SELECT * FROM Track", function(err, data) {
@@ -35,8 +35,25 @@ app.get("/users", function(req, res){
 			return console.log(err);
 		}
 		res.json(data);
-		console.log(data);
 	});
+});
+
+app.post("/users", function(req, res){
+
+	const user = {
+		user_id: req.body.user_id,
+		user_name: req.body.user_name,
+		user_password: req.body.user_password,
+		user_login: req.body.user_login
+	}
+
+	pool.query('INSERT INTO t_user SET ?', user, (error, result) => {
+        if (error) throw error;
+    });
+
+	console.log('Adding new user: ', user);
+
+	res.send(user);
 });
 
 
@@ -56,7 +73,6 @@ app.get("/genres", function(req, res){
 			return console.log(err);
 		}
 		res.json(data);
-		console.log(data);
 	});
 });
 

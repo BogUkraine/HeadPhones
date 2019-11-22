@@ -12,16 +12,20 @@ class Form extends Component {
         this.state = {
             users: [
                 {
-                    login: "",
-                    password: ""
+                    user_id: "",
+                    user_name: "",
+                    user_password: "",
+                    user_login: ""
                 }
             ],
             inputLogin: "",
-            inputPass: ""
+            inputPass: "",
+            inputName: ""
         }
 
         this.onChangeLogin = this.onChangeLogin.bind(this);
         this.onChangePass = this.onChangePass.bind(this);
+        this.onChangeName = this.onChangeName.bind(this);
     }
 
     componentDidMount() {
@@ -30,7 +34,7 @@ class Form extends Component {
                 this.setState({
                     users: response.data,
                 });
-                console.log(this.state.users);
+                //console.log(this.state.users);
             })
             .catch(function (error) {
                 console.log(error);
@@ -47,6 +51,11 @@ class Form extends Component {
         console.log(this.state.inputPass);
     }
 
+    onChangeName (event) {
+        this.setState({inputName: event.target.value});
+        console.log(this.state.inputName);
+    }
+
 
     render () {
         return (
@@ -56,7 +65,7 @@ class Form extends Component {
                     <label className="form__login form__label">
                     <span className="form__description">Login:</span>
                     <input
-                    className="form__login_field"
+                    className="form__login_field field"
                     type="text"
                     id="loginEnter"
                     onChange={this.onChangeLogin}
@@ -65,7 +74,7 @@ class Form extends Component {
                         <label className="form__password form__label">
                         <span className="form__description">Password:</span>
                         <input
-                        className="form__password_field"
+                        className="form__password_field field"
                         type="password"
                         onChange={this.onChangePass}
                         />
@@ -81,7 +90,7 @@ class Form extends Component {
                 <label className="form__login form__label">
                     <span className="form__description">Login:</span>
                     <input
-                    className="form__login_field"
+                    className="form__login_field field"
                     type="text"
                     id="loginEnter"
                     onChange={this.onChangeLogin}
@@ -90,15 +99,24 @@ class Form extends Component {
                         <label className="form__password form__label">
                         <span className="form__description">Password:</span>
                         <input
-                        className="form__password_field"
+                        className="form__password_field field"
                         type="password"
                         onChange={this.onChangePass}
                         />
                         </label>
+                            <label className="form__name form__label">
+                            <span className="form__description">UserName:</span>
+                            <input
+                            className="form__name_field field"
+                            type="text"
+                            onChange={this.onChangeName}
+                            />
+                            </label>
                 <ButtonsCreate
                     login={this.state.inputLogin}
                     pass={this.state.inputPass}
-                    userInfo={this.state.users}
+                    name={this.state.inputName}
+                    users={this.state.users}
                 />
             </form>
         </div>

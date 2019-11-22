@@ -9,7 +9,7 @@ const LoginField = ( ({users}) => {
         <label className="form__login form__label">
             <span className="form__description">Login:</span>
             <input
-            className="form__login_field"
+            className="form__login_field button"
             type="text"
             />
         </label>

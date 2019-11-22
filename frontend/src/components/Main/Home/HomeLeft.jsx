@@ -19,10 +19,31 @@ class HomeTracks extends Component {
                 {
                     track_id: "",
                     track_link: "",
-                    gentre_id: "",
+                    genre_id: "",
                     album_id: "",
                     track_name: "",
                     track_time: ""
+                }
+            ],
+            arrSingers: [
+                {
+                    sunger_id: "",
+                    singer_name: ""
+                }
+            ],
+            arrAlbums: [
+                {
+                    album_id: "",
+                    singer_id: "",
+                    album_name: "",
+                    album_year: "",
+                    album_img: ""
+                }
+            ],
+            arrGenres: [
+                {
+                    genre_id: "",
+                    genre_name: ""
                 }
             ]
         }
@@ -34,8 +55,26 @@ class HomeTracks extends Component {
                 this.setState({
                     arrTracks: response.data,
                 });
-                console.log(this.state.arrTracks);
-                console.log(this.state.arrTracks[1].track_name);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+        axios.get("http://localhost:3210/singers")
+            .then( (response) => {
+                this.setState({
+                    arrSingers: response.data,
+                });
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+        axios.get("http://localhost:3210/albums")
+            .then( (response) => {
+                this.setState({
+                    arrAlbums: response.data,
+                });
             })
             .catch(function (error) {
                 console.log(error);
@@ -47,7 +86,7 @@ class HomeTracks extends Component {
         const arrayTracks = this.state.arrTracks;
 
         return (
-            <ArrayTracks array={arrayTracks}/>
+            <ArrayTracks arrayTracks={arrayTracks} />
         );
     }
 }
