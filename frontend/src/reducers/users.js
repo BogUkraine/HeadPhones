@@ -22,11 +22,6 @@ export default function users (state = initialState, action) {
 				...action.payload
 			]
 		}
-		case('ENTER_USER'): {
-			return state
-				//state.currentUser: action.payload
-			
-		}
 	}
 
 	return state;

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
+import { connect } from 'react-redux';
 
 class ButtonsCreate extends Component {
 
@@ -33,8 +34,7 @@ class ButtonsCreate extends Component {
                     user_login: this.props.login
                 })
                 .then( (response) => {
-                    console.log(response);
-                    console.log(response.data);
+                    this.props.onEnter(response.data)
                 })
                 .catch(error => {
                     console.log(error.response);
@@ -64,4 +64,22 @@ class ButtonsCreate extends Component {
     }
 }
 
-export default ButtonsCreate;
+export default connect(
+	state => ({
+	    testUser: state.currentUser
+	}),
+	dispatch => ({
+		onEnter: (data) => {
+			dispatch({
+				type: "CHANGE_USER",
+				payload: data
+			})
+        },
+        onCreate: (data) => {
+			dispatch({
+				type: "ADD_USER",
+				payload: data
+			})
+		}
+	})
+  )(ButtonsCreate);

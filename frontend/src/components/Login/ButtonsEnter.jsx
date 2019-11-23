@@ -60,4 +60,4 @@ export default connect(
 			})
 		}
 	})
-  )(ButtonsEnter);;
+  )(ButtonsEnter);
