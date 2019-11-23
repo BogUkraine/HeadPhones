@@ -26,7 +26,7 @@ class Home extends Component {
             console.log(error);
         });
 
-        axios.get("http://localhost:3210/users/current/tracks")
+        axios.get("http://localhost:3210/tracks/joined")
         .then( (response) => {
             this.props.loadTracks(response.data);
         })

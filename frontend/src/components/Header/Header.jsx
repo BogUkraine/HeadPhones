@@ -1,8 +1,8 @@
 import React from 'react';
 
-import Search from './Search';
-import Nav from './Nav';
-import Username from './Username';
+import Search from './HeaderSearch';
+import Nav from './HeaderNav';
+import Username from './HeaderUser';
 
 import logo from '../../images/icon.png';
 

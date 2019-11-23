@@ -1,23 +1,31 @@
-import React from 'react';
+import React, {Component} from 'react';
+import { connect } from 'react-redux';
 
-const LibraryList = () => {
-    return (
-        <div className="library__track">
-            <div className="library__track_title">
-                <div className="library__track_img"></div>
-                <span className="library__track_name">track_name</span>
-            </div>
-            <div className="library__track_description">
-                <span className="library__track_singer">singer</span>
-                <span className="library__track_album">album</span>
-                <span className="library__track_year">2019</span>
-            </div>
-            <div className="library__track_time">
-                <span className="current_time">1:01</span>
-                <span className="whole_time">3:30</span>
-            </div>
-        </div>
-    );
+import LibraryTrack from './LibraryTrack';
+
+class LibraryList extends Component {
+    render() {
+        return(
+            this.props.tracks.map(( value ) => {
+                return (
+                    <LibraryTrack
+                        track_name={value.track_name}
+                        album_name={value.album_name}
+                        singer_name={value.singer_name}
+                        album_year={value.album_year}
+                        album_img={value.album_img}
+                        track_time={value.track_time}
+                        key={value.track_id}
+                    />
+                );
+            })
+        )
+    }
 }
 
-export default LibraryList;
+export default connect(
+    state => ({
+        tracks: state.tracks
+    }),
+    dispatch => ({})
+)(LibraryList);

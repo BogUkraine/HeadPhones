@@ -1,11 +1,11 @@
 import React from 'react';
 
-import ArrayTracks from './ArrayTracks';
+import HomeList from './HomeList';
 
 const HomeLeft = () => {
     return (
         <div className="home__left">
-            <ArrayTracks />
+            <HomeList />
         </div>
     );
 }

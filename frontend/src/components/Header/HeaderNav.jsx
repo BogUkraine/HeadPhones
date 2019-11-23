@@ -1,6 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
+import NavPlaylists from './NavPlaylists';
+
 const Nav = () => {
 	return (
         <div className="header__navigation">
@@ -22,10 +24,7 @@ const Nav = () => {
                 <NavLink to="/playlist">
                     <li className="header__topmenu_item">
                         <span className="header__topmenu_text">Playlist</span>
-                        <ul className="header__submenu">
-                            <li className="header__submenu_item">userPlaylist.map</li>
-                            <li className="header__submenu_item">CreatePlaylist</li>
-                        </ul>
+                        <NavPlaylists />
                     </li>
                 </NavLink>
             </ul>

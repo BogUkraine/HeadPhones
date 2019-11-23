@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 
 import HomeTrack from './HomeTrack';
 
-class ArrayTracks extends Component {
-
+class HomeList extends Component {
     render() {
         return (
             this.props.tracks.map(( value ) => {
@@ -15,6 +14,7 @@ class ArrayTracks extends Component {
                         singer_name={value.singer_name}
                         album_year={value.album_year}
                         album_img={value.album_img}
+                        track_time={value.track_time}
                         key={value.track_id}
                     />
                 );
@@ -28,4 +28,4 @@ export default connect(
         tracks: state.tracks
     }),
     dispatch => ({})
-)(ArrayTracks);
+)(HomeList);

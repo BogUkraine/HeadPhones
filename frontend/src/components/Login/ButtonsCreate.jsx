@@ -40,9 +40,6 @@ class ButtonsCreate extends Component {
                     console.log(error.response);
                 });
         }
-        else{
-            
-        }
     }
 
     render() {

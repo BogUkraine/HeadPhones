@@ -22,7 +22,7 @@ app.use(bodyParser.json());
 //    GET_METHODS     //
 
 app.get("/tracks", function(req, res){
-    pool.query("SELECT * FROM Track", function(err, data) {
+    pool.query("SELECT * FROM tracks", function(err, data) {
       if(err) {
           return console.log(err);
       }
@@ -32,7 +32,7 @@ app.get("/tracks", function(req, res){
 });
 
 app.get("/users", function(req, res){
-	pool.query("SELECT * FROM t_user", function(err, data) {
+	pool.query("SELECT * FROM users", function(err, data) {
 		if(err) {
 			return console.log(err);
 		}
@@ -41,7 +41,7 @@ app.get("/users", function(req, res){
 });
 
 app.get("/albums", function(req, res){
-	pool.query("SELECT * FROM album", function(err, data) {
+	pool.query("SELECT * FROM albums", function(err, data) {
 		if(err) {
 			return console.log(err);
 		}
@@ -51,7 +51,7 @@ app.get("/albums", function(req, res){
 });
 
 app.get("/genres", function(req, res){
-	pool.query("SELECT * FROM genre", function(err, data) {
+	pool.query("SELECT * FROM genres", function(err, data) {
 		if(err) {
 			return console.log(err);
 		}
@@ -60,7 +60,7 @@ app.get("/genres", function(req, res){
 });
 
 app.get("/playlists", function(req, res){
-	pool.query("SELECT * FROM t_playlist", function(err, data) {
+	pool.query("SELECT * FROM playlists", function(err, data) {
 		if(err) {
 			return console.log(err);
 		}
@@ -70,7 +70,17 @@ app.get("/playlists", function(req, res){
 });
 
 app.get("/singers", function(req, res){
-	pool.query("SELECT * FROM singer", function(err, data) {
+	pool.query("SELECT * FROM singers", function(err, data) {
+		if(err) {
+			return console.log(err);
+		}
+		res.json(data);
+		//console.log(data);
+	});
+});
+
+app.get("/quotes", function(req, res){
+	pool.query("SELECT * FROM quotes", function(err, data) {
 		if(err) {
 			return console.log(err);
 		}
@@ -99,14 +109,15 @@ app.post("/users", function(req, res){
 	res.send(user);
 });
 
-//    CURRENT_USER     //
-
-app.get("/users/current/playlists", function(req, res){
+app.get("/tracks/joined", function(req, res){
 	pool.query(
 		`SELECT
-		t_user.user_id, t_playlist.playlist_id, t_playlist.track_id, t_playlist.playlist_name
-		From t_user LEFT JOIN t_playlist
-		ON t_user.user_id = t_playlist.playlist_id`,
+		tr.track_id, tr.track_link, tr.track_name, tr.track_time,
+		al.album_name, al.album_year, al.album_img,
+		sn.singer_name,
+		gn.genre_name
+		From ((tracks tr JOIN genres gn USING(genre_id)) JOIN albums al USING(album_id))
+		JOIN singers sn USING(singer_id)`,
 		function(err, data) {
 		if(err) {
 			return console.log(err);
@@ -115,15 +126,14 @@ app.get("/users/current/playlists", function(req, res){
 	});
 });
 
-app.get("/users/current/tracks", function(req, res){
+//    CURRENT_USER     //
+
+app.get("/users/current/playlists", function(req, res){
 	pool.query(
 		`SELECT
-		tr.track_id, tr.track_link, tr.track_name, tr.track_time,
-		al.album_name, al.album_year, al.album_img,
-		sn.singer_name,
-		gn.genre_name
-		From ((Track tr JOIN genre gn USING(genre_id)) JOIN album al USING(album_id))
-		JOIN singer sn USING(singer_id)`,
+		users.user_id, playlists.playlist_id, playlists.track_id, playlists.playlist_name
+		From users LEFT JOIN playlists
+		ON users.user_id = playlists.playlist_id`,
 		function(err, data) {
 		if(err) {
 			return console.log(err);

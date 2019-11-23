@@ -1,4 +1,10 @@
 npm install axios --save-dev
+//redux//
+npm i --save-dev clean-webpack-plugin
+    copy-webpack-plugin mini-css-extract-plugin
+    optimize-css-assets-webpack-plugin
+    uglifyjs-webpack-plugin html-webpack-plugin
+    imagemin-webpack-plugin
 
 when start programm:
 npm start
