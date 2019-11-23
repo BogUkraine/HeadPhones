@@ -8,7 +8,7 @@ import Playlist from "./Playlist/Playlist";
 const Main = () => {
 	return (
         <main className="main">
-            <Route exact path="/home" component={ Home }></Route>
+            <Route path="/home" component={ Home }></Route>
             <Route path="/library" component={ Library }></Route>
             <Route path="/playlist" component={ Playlist }></Route>
         </main>

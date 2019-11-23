@@ -4,7 +4,7 @@ import Search from './Search';
 import Nav from './Nav';
 import Username from './Username';
 
-import logo from '../../images/logo.png';
+import logo from '../../images/icon.png';
 
 const Header = () => {
 	return (

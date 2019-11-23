@@ -103,7 +103,27 @@ app.post("/users", function(req, res){
 
 app.get("/users/current/playlists", function(req, res){
 	pool.query(
-		"SELECT * FROM t_user",
+		`SELECT
+		t_user.user_id, t_playlist.playlist_id, t_playlist.track_id, t_playlist.playlist_name
+		From t_user LEFT JOIN t_playlist
+		ON t_user.user_id = t_playlist.playlist_id`,
+		function(err, data) {
+		if(err) {
+			return console.log(err);
+		}
+		res.json(data);
+	});
+});
+
+app.get("/users/current/tracks", function(req, res){
+	pool.query(
+		`SELECT
+		tr.track_id, tr.track_link, tr.track_name, tr.track_time,
+		al.album_name, al.album_year, al.album_img,
+		sn.singer_name,
+		gn.genre_name
+		From ((Track tr JOIN genre gn USING(genre_id)) JOIN album al USING(album_id))
+		JOIN singer sn USING(singer_id)`,
 		function(err, data) {
 		if(err) {
 			return console.log(err);

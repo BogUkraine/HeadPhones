@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import Form from './Form';
 
-import logo from '../../images/logo.png';
+import logo from '../../images/biglogo.png';
 class Login extends Component {
 
     componentDidMount() {

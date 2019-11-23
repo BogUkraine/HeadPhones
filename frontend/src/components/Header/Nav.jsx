@@ -4,11 +4,31 @@ import { NavLink } from 'react-router-dom';
 const Nav = () => {
 	return (
         <div className="header__navigation">
-            <NavLink to="/home"><div className="header__link">Home</div></NavLink>
-            <NavLink to="/library"><div className="header__link">Library</div></NavLink>
-            <NavLink to="/playlist">
-                <div className="header__link">Playlist</div>
-            </NavLink>
+            <ul className="header__topmenu">
+                <NavLink to="/home">
+                    <li className="header__topmenu_item">
+                    <span className="header__topmenu_text">
+                        Home
+                    </span>
+                    </li>
+                </NavLink>
+                <NavLink to="/library">
+                    <li className="header__topmenu_item">
+                    <span className="header__topmenu_text">
+                        Library
+                    </span>
+                    </li>
+                </NavLink>
+                <NavLink to="/playlist">
+                    <li className="header__topmenu_item">
+                        <span className="header__topmenu_text">Playlist</span>
+                        <ul className="header__submenu">
+                            <li className="header__submenu_item">userPlaylist.map</li>
+                            <li className="header__submenu_item">CreatePlaylist</li>
+                        </ul>
+                    </li>
+                </NavLink>
+            </ul>
         </div>
 	);
 }

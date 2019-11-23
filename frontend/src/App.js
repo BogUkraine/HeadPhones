@@ -28,7 +28,7 @@ class App extends Component {
 		console.log("render redux", this.props.testStore);
 		return (
 			<BrowserRouter>
-				<Route path="/login" component={ Login }></Route>
+				<Route exact path="/login" component={ Login }></Route>
 				<Route path="/home" component={ Header }></Route>
 				<Route path="/home" component={ Main }></Route>
 				<Route path="/home" component={ Footer }></Route>
