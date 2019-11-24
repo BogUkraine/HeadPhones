@@ -1,11 +1,23 @@
-import React from 'react';
+import React, { Component } from 'react';
+import {connect} from 'react-redux';
 
-const Footer = () => {
-	return (
-        <footer className="footer">
-            <audio className="footer__audio"></audio>
-        </footer>
-	);
+class Footer extends Component {
+    render() {
+        return (
+            <footer className="footer">
+                <audio
+                className="footer__audio"
+                src={this.props.currentTrack.track_link}
+                controls>
+                </audio>
+            </footer>
+        );
+    }
 }
 
-export default Footer;
+export default connect(
+	state => ({
+        currentTrack: state.currentTrack
+	}),
+	dispatch => ({})
+  )(Footer);

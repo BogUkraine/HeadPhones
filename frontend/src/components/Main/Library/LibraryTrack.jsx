@@ -4,7 +4,7 @@ import time from '../../../functions/time.js';
 const LibraryTrack = ( ({track_name, singer_name, album_name, album_year, album_img, track_time}) => {
     return (
         <div className="library__track">
-            <img className="library__track_img" src={album_img}/>
+            <img className="library__track_img" src={album_img} alt="track_img"/>
             <div className="library__track_wrapper">
                 <span className="library__track_name">{track_name}</span>
                 <div className="library__track_description">
