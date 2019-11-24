@@ -48,18 +48,19 @@
         padding: 0 20px;
         flex: 4;
         justify-content: center;
-        border-right: 2px solid $black;
     }
 
     &_year {
         flex: 2;
         justify-content: center;
         padding-left: 20px;
+        border-left: 2px solid $black;
     }
 
     &_time {
-        flex: 1;
+        display: inline-block;
         text-align: end;
+        width: 35px;
     }
 
     &:hover {

@@ -89,26 +89,6 @@ app.get("/quotes", function(req, res){
 	});
 });
 
-//    POST_METHODS     //
-
-app.post("/users", function(req, res){
-
-	const user = {
-		user_id: req.body.user_id,
-		user_name: req.body.user_name,
-		user_password: req.body.user_password,
-		user_login: req.body.user_login
-	}
-
-	pool.query('INSERT INTO t_user SET ?', user, (error, result) => {
-        if (error) throw error;
-    });
-
-	console.log('Adding new user: ', user);
-
-	res.send(user);
-});
-
 app.get("/tracks/joined", function(req, res){
 
 	pool.query(
@@ -126,6 +106,39 @@ app.get("/tracks/joined", function(req, res){
 		res.json(data);
 	});
 });
+
+//    POST_METHODS     //
+
+app.post("/users", function(req, res){
+	const user = {
+		user_id: req.body.user_id,
+		user_name: req.body.user_name,
+		user_password: req.body.user_password,
+		user_login: req.body.user_login
+	}
+
+	pool.query('INSERT INTO t_user SET ?', user, (error, result) => {
+        if (error) throw error;
+    });
+	res.send(user);
+});
+
+app.post("/playlists", function(req, res){
+	const playlist = {
+		playlist_id: req.body.playlist_id,
+		user_id: req.body.user_id,
+		track_id: req.body.track_id,
+		playlist_name: req.body.playlist_name
+	}
+
+	pool.query("INSERT INTO playlists SET ?", playlist, function(err, data) {
+		if(err) {
+			return console.log(err);
+		}
+		res.send(playlist);
+	});
+});
+
 
 
 //    CURRENT_USER     //

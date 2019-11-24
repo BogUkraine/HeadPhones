@@ -36,7 +36,7 @@ class ButtonsEnter extends Component {
                     }
                 })
                 .then( (response) => {
-                    this.props.getPlaylists(response.data);
+                    this.props.loadCurrentPlaylists(response.data);
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -84,9 +84,9 @@ export default connect(
 				payload: data
 			})
         },
-        getPlaylists: (data) => {
+        loadCurrentPlaylists: (data) => {
 			dispatch({
-				type: "GET_CURRENT_PLAYLISTS",
+				type: "LOAD_CURRENT_PLAYLISTS",
 				payload: data
 			})
 		}

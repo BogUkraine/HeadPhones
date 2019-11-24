@@ -5,7 +5,6 @@ import axios from 'axios';
 class NavPlaylists extends Component {
 
     onClickItem(id) {
-
         axios.get("http://localhost:3210/current/playlist_data", {
             params: {
                 playlist_id: id
@@ -17,7 +16,6 @@ class NavPlaylists extends Component {
         .catch(function (error) {
             console.log(error);
         });
-
     }
 
     render() {
@@ -40,7 +38,7 @@ class NavPlaylists extends Component {
 
 export default connect(
     state => ({
-        currentPlaylists: state.playlists
+        currentPlaylists: state.currentPlaylists
     }),
     dispatch => ({
         loadCurrentPlaylist: (data) => {

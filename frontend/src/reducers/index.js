@@ -7,6 +7,7 @@ import albums from './albums';
 import singers from './singers';
 import currentUser from './currentUser';
 import currentPlaylist from './currentPlaylist';
+import currentPlaylists from './currentPlaylistS';
 
 export default combineReducers({
     users,
@@ -15,5 +16,6 @@ export default combineReducers({
     albums,
     singers,
     currentUser,
-    currentPlaylist
+    currentPlaylist,
+    currentPlaylists
 })

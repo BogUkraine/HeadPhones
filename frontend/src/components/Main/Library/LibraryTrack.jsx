@@ -1,15 +1,7 @@
 import React from 'react';
+import time from '../../../functions/time.js';
 
 const LibraryTrack = ( ({track_name, singer_name, album_name, album_year, album_img, track_time}) => {
-    let minutes, seconds;
-
-    const time = (db_time) => {
-        minutes = Math.floor(db_time/60);
-        seconds = db_time%60;
-        if(seconds < 10) seconds = "0" + seconds.toString();
-        return(`${minutes}:${seconds}`)
-    }
-
     return (
         <div className="library__track">
             <img className="library__track_img" src={album_img}/>

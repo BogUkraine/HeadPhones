@@ -20,7 +20,7 @@
 
         &_item {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             justify-content: center;
             margin: 0 20px;
             height: 50px;
@@ -47,13 +47,16 @@
         list-style: none;
         padding-left: 0px;
         margin-left: 0px;
-        margin-top: 110px;
+        margin-top: 50px;
         width: $submenu-width;
         background-color: $submenu-color;
 
         &_item {
-            padding: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
+            padding: 5px;
             font-size: $text-size-smallest;
             width: 100%;
             height: $submenu-item-height;

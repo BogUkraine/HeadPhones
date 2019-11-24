@@ -3,31 +3,12 @@ import {connect} from 'react-redux';
 import axios from 'axios';
 
 import PlaylistButtons from './PlaylistButtons';
+import tracksTime from '../../../functions/tracksTime.js';
+import countOfTracks from '../../../functions/countOfTracks.js'
 
 class PlaylistDescription extends Component {
 
-    timeDelimiter = (db_time) => {
-        //let hours = Math.floor(db_time/3600);
-        let minutes = Math.floor(db_time/60);
-        let seconds = db_time%60;
-        if(seconds < 10) seconds = "0" + seconds.toString();
-        return(`${minutes}:${seconds}`)
-    }
-
-    countOfTracks = (data) => {
-        return data.length;
-    }
-
-    tracksTime = (data) => {
-        let time = 0;
-        for( let i = 0; i < data.length; i++ ) {
-            time += data[i].track_time;
-        }
-        return this.timeDelimiter(time);
-    }
-
     render() {
-
         let p_name = this.props.playlistData[0].playlist_name;
         return (
             <div className="playlist__header_wrapper">
@@ -37,12 +18,12 @@ class PlaylistDescription extends Component {
                     <span
                     className="header__tracks_count"
                     >
-                        Tracks count: {this.countOfTracks(this.props.playlistData)}
+                        Tracks count: {countOfTracks(this.props.playlistData)}
                     </span>
                     <span
                     className="header__tracks_time"
                     >
-                        Tracks time: {this.tracksTime(this.props.playlistData)}
+                        Tracks time: {tracksTime(this.props.playlistData)}
                     </span>
                 </div>
                 <PlaylistButtons />

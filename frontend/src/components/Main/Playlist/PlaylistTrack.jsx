@@ -1,4 +1,5 @@
 import React from 'react';
+import time from '../../../functions/time.js';
 
 const PlaylistTracks = (({track_name, singer_name, album_name, album_year, album_img, track_time}) => {
     return (
@@ -11,10 +12,7 @@ const PlaylistTracks = (({track_name, singer_name, album_name, album_year, album
                 <span className="playlist__track_singer">{singer_name}</span>
                 <span className="playlist__track_album">{album_name}</span>
                 <span className="playlist__track_year">{album_year}</span>
-            </div>
-            <div className="playlist__track_time">
-                <span className="current_time">1:01</span>
-                <span className="whole_time">3:30</span>
+                <span className="playlist__track_time">{time(track_time)}</span>
             </div>
         </div>
     );
