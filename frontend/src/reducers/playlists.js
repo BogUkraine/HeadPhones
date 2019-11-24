@@ -10,6 +10,9 @@ export default function playlists (state = initialState, action) {
 				...action.payload
 			]
 		}
+		case('GET_CURRENT_PLAYLISTS'): {
+			return action.payload
+		}
 		default: {
 			return state;
 		}

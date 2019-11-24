@@ -14,7 +14,6 @@ class ButtonsCreate extends Component {
     }
 
     handleClick(event) {
-
         let isLogin = false;
 
         for(let i = 0; i < this.props.users.length; i++) {
@@ -34,12 +33,20 @@ class ButtonsCreate extends Component {
                     user_login: this.props.login
                 })
                 .then( (response) => {
-                    this.props.onEnter(response.data)
                 })
                 .catch(error => {
                     console.log(error.response);
                 });
+
+            axios.get("http://localhost:3210/tracks/joined", {userInfo: this.props.users.length})
+                .then( (response) => {
+                    this.props.onEnter(response.data);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
         }
+
     }
 
     render() {
@@ -71,12 +78,6 @@ export default connect(
 				type: "CHANGE_USER",
 				payload: data
 			})
-        },
-        onCreate: (data) => {
-			dispatch({
-				type: "ADD_USER",
-				payload: data
-			})
-		}
+        }
 	})
   )(ButtonsCreate);

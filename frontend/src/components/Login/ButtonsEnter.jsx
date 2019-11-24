@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import axios from 'axios';
+
 class ButtonsEnter extends Component {
 
     constructor(props){
@@ -11,12 +13,36 @@ class ButtonsEnter extends Component {
 
     handleClick(event) {
         let isExist = false;
+
         for(let i = 0; i < this.props.users.length; i++) {
             if((this.props.login === this.props.users[i].user_login) && (this.props.pass === this.props.users[i].user_password)){
                 isExist = true;
-                this.props.onEnter(this.props.users[i]);
-                console.log("this.props.users[i]", this.props.users[i]);
-                console.log("Buttons User", this.props.testUser);
+
+                /*
+                axios.get("http://localhost:3210/current/tracks", {
+                    params: {
+                        userInfo: this.props.users[i].user_id
+                    }
+                })
+                .then( (response) => {
+                    this.props.onEnter(response.data);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });*/
+
+                axios.get("http://localhost:3210/current/playlists", {
+                    params: {
+                        userInfo: this.props.users[i].user_id
+                    }
+                })
+                .then( (response) => {
+                    this.props.getPlaylists(response.data);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+
                 break;
             }
         }
@@ -56,6 +82,12 @@ export default connect(
 		onEnter: (data) => {
 			dispatch({
 				type: "CHANGE_USER",
+				payload: data
+			})
+        },
+        getPlaylists: (data) => {
+			dispatch({
+				type: "GET_CURRENT_PLAYLISTS",
 				payload: data
 			})
 		}

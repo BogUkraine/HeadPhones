@@ -24,7 +24,10 @@ const Nav = () => {
                 <NavLink to="/playlist">
                     <li className="header__topmenu_item">
                         <span className="header__topmenu_text">Playlist</span>
-                        <NavPlaylists />
+                        <ul className="header__submenu">
+                            <NavPlaylists />
+                            <li className="header__submenu_item">CreatePlaylist</li>
+                        </ul>
                     </li>
                 </NavLink>
             </ul>

@@ -48,15 +48,15 @@
         padding-left: 0px;
         margin-left: 0px;
         margin-top: 110px;
-        width: 150px;
-        background-color: $header-color;
+        width: $submenu-width;
+        background-color: $submenu-color;
 
         &_item {
             padding: 5px;
             text-align: center;
             font-size: $text-size-smallest;
             width: 100%;
-            height: 20px;
+            height: $submenu-item-height;
             border-bottom: 1px solid $black;
 
             &:hover {
