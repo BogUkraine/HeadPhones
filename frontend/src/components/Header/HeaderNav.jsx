@@ -9,6 +9,7 @@ class Nav extends Component {
     constructor(props){
         super(props);
         this.onClickCreate = this.onClickCreate.bind(this);
+        this.onClickItem = this.onClickItem.bind(this);
     }
 
     onClickCreate() {
@@ -65,6 +66,20 @@ class Nav extends Component {
             });
     }
 
+    onClickItem() {
+        axios.get("http://localhost:3210/current/playlist_data", {
+            params: {
+                playlist_id: this.props.currentPlaylists[0].playlist_id
+            }
+        })
+        .then( (response) => {
+            this.props.loadCurrentPlaylist(response.data);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+    }
+
     render() {
         return (
             <div className="header__navigation">
@@ -84,7 +99,7 @@ class Nav extends Component {
                         </li>
                     </NavLink>
                     <NavLink to="/playlist">
-                        <li className="header__topmenu_item">
+                        <li className="header__topmenu_item" onClick={this.onClickItem}>
                             <span className="header__topmenu_text">Playlist</span>
                             <ul className="header__submenu">
                                 <NavPlaylists />
@@ -106,7 +121,8 @@ class Nav extends Component {
 export default connect(
 	state => ({
         currentUser: state.currentUser,
-        playlists: state.playlists
+        playlists: state.playlists,
+        currentPlaylists: state.currentPlaylists
 	}),
 	dispatch => ({
         loadCurrentPlaylist: (data) => {

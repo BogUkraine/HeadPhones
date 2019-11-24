@@ -60,7 +60,7 @@
             font-size: $text-size-smallest;
             width: 100%;
             height: $submenu-item-height;
-            border-bottom: 1px solid $black;
+            border-bottom: 2px solid $border-submenu-item-color;
 
             &:hover {
                 background-color: $submenu-hover-color;
