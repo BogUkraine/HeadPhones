@@ -160,8 +160,50 @@ app.get("/current/playlists", function(req, res){
 	const user = req.query.userInfo;
 
 	pool.query(
-		`SELECT DISTINCT playlists.playlist_name FROM playlists, users
-		WHERE users.user_id = ${user}`, user,
+		`SELECT DISTINCT playlist_id, playlist_name
+		FROM playlists
+		WHERE user_id = ${user}`, user,
+		function(err, data) {
+		if(err) {
+			return console.log(err);
+		}
+		res.json(data);
+	});
+});
+
+app.get("/current/playlist_data", function(req, res){
+	const playlist_id = req.query.playlist_id;
+
+	pool.query(
+		`SELECT
+		p.playlist_id, p.playlist_name,
+		t.track_id, t.track_name, t.track_time,
+		a.album_name,
+		s.singer_name,
+		g.genre_name
+		FROM users u JOIN playlists p USING(user_id)
+		JOIN tracks t USING(track_id)
+		JOIN albums a USING(album_id)
+		JOIN singers s USING(singer_id)
+		JOIN genres g USING(genre_id)
+		WHERE playlist_id = ${playlist_id}`, playlist_id,
+		function(err, data) {
+		if(err) {
+			return console.log(err);
+		}
+		res.json(data);
+	});
+});
+
+app.get("/current/user", function(req, res){
+	const user_id = req.query.user_id;
+
+	pool.query(
+		`SELECT
+		u.user_id, u.user_login,
+		u.user_password, u.user_name
+		FROM users u
+		WHERE user_id = ${user_id}`, user_id,
 		function(err, data) {
 		if(err) {
 			return console.log(err);

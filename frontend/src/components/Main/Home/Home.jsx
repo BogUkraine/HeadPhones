@@ -33,15 +33,6 @@ class Home extends Component {
         .catch(function (error) {
             console.log(error);
         });
-
-        /*
-        axios.get("http://localhost:3210/playlists")
-        .then( (response) => {
-            this.props.loadPlaylists(response.data);
-        })
-        .catch(function (error) {
-            console.log(error);
-        });*/
     }
 
 

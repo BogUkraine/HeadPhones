@@ -18,10 +18,9 @@ class ButtonsEnter extends Component {
             if((this.props.login === this.props.users[i].user_login) && (this.props.pass === this.props.users[i].user_password)){
                 isExist = true;
 
-                /*
-                axios.get("http://localhost:3210/current/tracks", {
+                axios.get("http://localhost:3210/current/user", {
                     params: {
-                        userInfo: this.props.users[i].user_id
+                        user_id: this.props.users[i].user_id
                     }
                 })
                 .then( (response) => {
@@ -29,7 +28,7 @@ class ButtonsEnter extends Component {
                 })
                 .catch(function (error) {
                     console.log(error);
-                });*/
+                });
 
                 axios.get("http://localhost:3210/current/playlists", {
                     params: {
@@ -65,7 +64,7 @@ class ButtonsEnter extends Component {
                     id="Login"
                     onClick={this.handleClick}
                     >
-                        Enter
+                    Enter
                     </button>
                 </NavLink>
             </div>

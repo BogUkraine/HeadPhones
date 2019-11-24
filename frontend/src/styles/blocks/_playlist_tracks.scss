@@ -4,8 +4,8 @@
     justify-content: space-between;
     width: 100%;
     height: 60px;
-    border-bottom: 1px solid #616161;
-    background: rgba(255,255,255,0.1);
+    border-bottom: 1px solid $border-color;
+    background: $track-color;
 
     &_title {
         display: flex;
@@ -16,14 +16,13 @@
     &_img {
         width: 50px;
         height: 50px;
-        background: linear-gradient(45deg, rgb(160, 231, 29), rgb(255, 211, 152));
         margin: 5px;
     }
 
     &_name {
         margin-left: 10px;
         font-weight: 600;
-        font-size: 18px;
+        font-size: $text-size-normal;
     }
 
     &_description {
@@ -36,27 +35,27 @@
     }
 
     &_singer {
-        font-size: 14px;
+        font-size: $text-size-smallest;
         margin-right: 20px;
     }
 
     &_album {
-        font-size: 14px;
+        font-size: $text-size-smallest;
         margin-right: 20px;
 
         &::before {
             content: '';
-            border: 1px solid $black;
+            border-left: 2px solid $black;
             margin-right: 20px;
         }
     }
 
     &_year {
-        font-size: 16px;
+        font-size: $text-size-small;
 
         &::before {
             content: '';
-            border: 1px solid $black;
+            border-left: 2px solid $black;
             margin-right: 20px;
         }
     }
@@ -67,11 +66,11 @@
         justify-content: flex-end;
         flex: 2;
         margin-right: 10px;
-        font-size: 16px;
+        font-size: $text-size-small;
     }
 
     &:hover {
-        background-color: rgba(255,255,255,0.5);
+        background-color: $track-hover-color;
     }
 }
 

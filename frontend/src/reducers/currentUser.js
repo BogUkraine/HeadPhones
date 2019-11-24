@@ -8,7 +8,7 @@ const initialState = {
 export default function currentUser (state = initialState, action) {
     switch(action.type){
 		case('CHANGE_USER'): {
-			return action.payload;
+			return action.payload[0];
         }
         default: {
 			return state;

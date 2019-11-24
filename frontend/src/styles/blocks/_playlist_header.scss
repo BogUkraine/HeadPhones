@@ -5,30 +5,30 @@
     }
 
     &__user_name {
-        font-size: 16px;
+        font-size: $text-size-small;
         margin-right: 20px;
     }
 
     &__tracks {
 
         &_count {
-            font-size: 16px;
+            font-size: $text-size-small;
             margin-right: 20px;
 
             &::before {
                 content: "";
-                border: 1px solid $black;
+                border-left: 2px solid $black;
                 margin-right: 20px;
             }
         }
 
         &_time {
-            font-size: 16px;
+            font-size: $text-size-small;
             margin-right: 20px;
 
             &::before {
                 content: "";
-                border: 1px solid $black;
+                border-left: 2px solid $black;
                 margin-right: 20px;
             }
         }

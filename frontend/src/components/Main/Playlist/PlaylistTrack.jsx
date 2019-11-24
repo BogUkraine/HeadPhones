@@ -1,38 +1,23 @@
 import React from 'react';
 
-const PlaylistTrack = () => {
+const PlaylistTracks = (({track_name, singer_name, album_name, album_year, album_img, track_time}) => {
     return (
-        <div className="playlist-music-block">
-            <div className="playlist-music-block__track-name-wrapper">
-                <div className="playlist-music-block__img"></div>
-                <span className="playlist-music-block__track-name">track_name</span>
+        <div className="playlist__track">
+            <div className="playlist__track_title">
+                <div className="playlist__track_img" src={album_img}></div>
+                <span className="playlist__track_name">{track_name}</span>
             </div>
-            <div className="playlist-music-block__description">
-                <span className="playlist-music-block__singer">singer</span>&#9679;
-                <span className="playlist-music-block__album">album</span>&#9679;
-                <span className="playlist-music-block__year">2019</span>
+            <div className="playlist__track_description">
+                <span className="playlist__track_singer">{singer_name}</span>
+                <span className="playlist__track_album">{album_name}</span>
+                <span className="playlist__track_year">{album_year}</span>
             </div>
-            <div className="playlist-music-block__time">
-                <span className="playlist-">1:01</span>/
-                <span className="playlist-">3:30</span>
+            <div className="playlist__track_time">
+                <span className="current_time">1:01</span>
+                <span className="whole_time">3:30</span>
             </div>
         </div>
     );
-}
+})
 
-function PlaylistWrapper() {
-    let arr = [1, 2, 3, 4, 5, 6, 7, 8];
-
-    const playlistTracks = arr.map( () => 
-            <PlaylistTrack />
-    );
-
-    return (
-        <div>
-            {playlistTracks}
-        </div>
-    );
-}
-
-
-export default PlaylistWrapper;
+export default PlaylistTracks;

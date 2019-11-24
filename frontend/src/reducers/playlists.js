@@ -1,6 +1,4 @@
 const initialState = [
-    'My home playlist',
-    'My work playlist'
 ];
 
 export default function playlists (state = initialState, action) {
