@@ -9,6 +9,7 @@ import currentUser from './currentUser';
 import currentPlaylist from './currentPlaylist';
 import currentPlaylists from './currentPlaylistS';
 import currentTrack from './currentTrack';
+import errors from './errors';
 
 export default combineReducers({
     users,
@@ -19,5 +20,6 @@ export default combineReducers({
     currentUser,
     currentPlaylist,
     currentPlaylists,
-    currentTrack
+    currentTrack,
+    errors
 })

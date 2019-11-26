@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import {connect} from 'react-redux';
 
 import LoginField from './LoginField';
 import PasswordField from './PasswordField';
@@ -111,4 +112,16 @@ class Form extends Component {
     }
 }
 
-export default Form;
+export default connect(
+	state => ({
+	  testUser: state.currentUser
+	}),
+	dispatch => ({
+        addError: (data) => {
+			dispatch({
+				type: "ADD_ERROR",
+				payload: data
+			})
+		}
+	})
+  )(Form);

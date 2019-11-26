@@ -13,9 +13,11 @@ class ButtonsEnter extends Component {
 
     handleClick(event) {
         let isExist = false;
-
+        let reg = /^[A-Za-z0-9_-]{3,12}$/;
+        
         for(let i = 0; i < this.props.users.length; i++) {
-            if((this.props.login === this.props.users[i].user_login) && (this.props.pass === this.props.users[i].user_password)){
+            if((this.props.login === this.props.users[i].user_login) &&
+            (this.props.pass === this.props.users[i].user_password)){
                 isExist = true;
 
                 axios.get("http://localhost:3210/current/user", {
@@ -50,6 +52,7 @@ class ButtonsEnter extends Component {
             event.preventDefault();
             alert("Wrong password or login");
         }
+
         console.log("Buttons User", this.props.testUser);
     }
 
@@ -87,6 +90,12 @@ export default connect(
         loadCurrentPlaylists: (data) => {
 			dispatch({
 				type: "LOAD_CURRENT_PLAYLISTS",
+				payload: data
+			})
+        },
+        addErrorLogin: (data) => {
+			dispatch({
+				type: "ADD_ERROR",
 				payload: data
 			})
 		}

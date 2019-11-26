@@ -5,6 +5,8 @@ npm i --save-dev clean-webpack-plugin
     optimize-css-assets-webpack-plugin
     uglifyjs-webpack-plugin html-webpack-plugin
     imagemin-webpack-plugin
+npm install --save-dev redux-saga
+npm install --save-dev redux-devtools-extension
 
 when start programm:
 npm start

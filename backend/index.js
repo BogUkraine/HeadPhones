@@ -11,7 +11,7 @@ const pool = mysql.createPool({
   host: "zanner.org.ua",
   port: "33321",
   user: "ka7608",
-  password: "123456",
+  password: "123123",
   database: "music"
 });
 

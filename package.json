@@ -6,7 +6,9 @@
   "dependencies": {
     "cors": "^2.8.5"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "redux-devtools-extension": "^2.13.8"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
