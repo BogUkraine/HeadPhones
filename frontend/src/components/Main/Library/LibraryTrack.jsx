@@ -3,15 +3,15 @@ import time from '../../../functions/time.js';
 
 const LibraryTrack = ( ({track_name, singer_name, album_name, album_year, album_img, track_time}) => {
     return (
-        <div className="library__track">
-            <img className="library__track_img" src={album_img} alt="track_img"/>
-            <div className="library__track_wrapper">
-                <span className="library__track_name">{track_name}</span>
-                <div className="library__track_description">
-                    <span className="library__track_singer">{singer_name}</span>
-                    <span className="library__track_album">{album_name}</span>
-                    <span className="library__track_year">{album_year}</span>
-                    <span className="library__track_time">{time(track_time)}</span>
+        <div className="common__track">
+            <img className="common__track_img" src={album_img} alt="track_img"/>
+            <div className="common__track_wrapper">
+                <span className="common__track_name">{track_name}</span>
+                <div className="common__track_description">
+                    <span className="common__track_singer">{singer_name}</span>
+                    <span className="common__track_album">{album_name}</span>
+                    <span className="common__track_year">{album_year}</span>
+                    <span className="common__track_time">{time(track_time)}</span>
                 </div>
             </div>
         </div>

@@ -1,4 +1,4 @@
-.home__track {
+.common__track {
     cursor: pointer;
     display: flex;
     flex-wrap: nowrap;
@@ -65,9 +65,5 @@
 
     &:hover {
         background-color: $track-hover-color;
-    }
-
-    &:last-child {
-        margin-bottom: 150px;
     }
 }

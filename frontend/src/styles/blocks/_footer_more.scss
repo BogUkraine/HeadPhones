@@ -1,0 +1,39 @@
+.footer__more {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: $footer-height;
+    width: $submenu-width;
+
+    &_submenu {
+        display: none;
+        flex-wrap: wrap;
+        list-style-type: none;
+        position: absolute;
+        bottom: $footer-more-bottom;       
+        background: $submenu-color;
+        width: $submenu-width;
+        right: $footer-more-right;
+        font-size: $text-size-smallest;
+        padding: 0;
+        font-weight: 300;
+        font-family: $font;
+    }
+
+    &_item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: $submenu-item-height;
+        border-top: 2px solid $border-submenu-item-color;
+
+        &:hover {
+            background: $submenu-hover-color;
+        }
+    }
+
+    &:hover > .footer__more_submenu {
+        display: flex;
+    }
+}

@@ -22,3 +22,24 @@ a:active {
 .main {
     height: $main-height;
 }
+
+.button {
+    cursor: pointer;
+    width: 180px;
+    height: 40px;
+    border: 2px solid $border-login-color;
+    border-radius: 2%;
+    background-color: $button-color;
+    font-family:  'Century Gothic', 'Comic Sans MS';
+    font-size: 20px;
+}
+
+.field {
+    cursor: pointer;
+    font-family: 'Century Gothic', 'Comic Sans MS';
+    font-size: 18px;
+    color: $input-text-color;
+    width: 260px;
+    border: 2px solid $border-login-color;
+    background-color: $input-inner-color;
+}
