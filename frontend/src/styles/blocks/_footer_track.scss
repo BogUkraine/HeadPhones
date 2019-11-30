@@ -2,9 +2,9 @@
     display: flex;
     flex: 5;
     flex-wrap: nowrap;
-    min-width: 300px;
-    height: $track-height;
-    border-bottom: 1px solid $border-color;
+    align-items: center;
+    min-width: 400px;
+    height: $footer-height;
     color: $text-color;
     font-size: $text-size-smallest;
 }

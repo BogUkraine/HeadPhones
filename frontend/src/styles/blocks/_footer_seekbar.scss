@@ -1,0 +1,22 @@
+.footer__seekbar {
+    cursor: pointer;
+    position: absolute;
+    width: 100%;
+    top: -2px;
+    height: $footer-seekbar-height;
+    -webkit-appearance: none;
+    vertical-align: middle;
+    background-color: $footer-seekbar-color;
+    outline: none;
+    
+    &:hover {
+        height: $footer-seekbar-hover-height;
+        top: -5px;
+    }
+
+    &_loaded {
+        position: absolute;
+        height: 100%;
+        background-color: $footer-seekbar-loaded-color;
+    }
+}

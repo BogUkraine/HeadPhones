@@ -8,6 +8,12 @@ export default function currentTrack (state = initialState, action) {
 		case('CHANGE_CURRENT_TRACK'): {
 			return action.payload;
         }
+        case('NEXT_CURRENT_TRACK'): {
+			return action.payload;
+        }
+        case('PREVIOUS_CURRENT_TRACK'): {
+			return action.payload;
+        }
         default: {
 			return state;
 		}

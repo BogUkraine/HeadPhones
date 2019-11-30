@@ -3,7 +3,7 @@
     align-items: center;
     justify-content: center;
     height: $footer-height;
-    width: $submenu-width;
+    min-width: $submenu-width;
 
     &_submenu {
         display: none;

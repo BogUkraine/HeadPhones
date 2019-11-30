@@ -1,15 +1,30 @@
 import React from 'react';
+import Slider from 'rc-slider';
+import 'rc-slider/assets/index.css';
 
-import FooterMore from './FooterMore';
-
-const FooterControlsRight = () => {
+const FooterControlsRight = (props) => {
     return(
         <div className="footer__controls_right">
-            <FooterMore />
-            <span className="fa fa-volume-up footer__volume" aria-hidden="true"></span>
-            <span className="fa fa-refresh footer__repeat" aria-hidden="true"></span>
-            <span className="fa fa-random footer__shuffle" aria-hidden="true"></span>
-            <span className="fa fa-caret-up footer__queue" aria-hidden="true"></span>
+            <div className="footer__volume">
+                <div className="footer__volume_seekbar">
+                    <Slider min={0} max={100}
+                    defaultValue={props.volumeLevel}
+                    onChange={props.updateVolumeLevel}
+                    />
+                </div>
+                <button className="control_button footer__volume_button">
+                    <span className="fa fa-volume-up" aria-hidden="true"></span>
+                </button>
+            </div>
+            <button onClick="" className="control_button footer__repeat">
+                <span className="fa fa-refresh" aria-hidden="true"></span>
+            </button>
+            <button onClick="" className="control_button footer__shuffle">
+                <span className="fa fa-random" aria-hidden="true"></span>
+            </button>
+            <button onClick="" className="control_button footer__queue">
+                <span className="fa fa-caret-up" aria-hidden="true"></span>
+            </button>
         </div>
     );
 }

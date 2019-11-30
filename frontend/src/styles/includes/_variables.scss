@@ -1,6 +1,7 @@
 // COLORS //
 $black: #000;
 $white: #fff;
+$fa-color: #ddd;
 
 //text
 $text-color: #ddd;
@@ -22,6 +23,11 @@ $track-hover-color: rgba(255,255,255,0.25);
 $submenu-color: #0e0e16;
 $submenu-hover-color: rgba(255,255,255,0.25);
 $library-inner-color: #323538;
+$footer-seekbar-color: #1a1a1a;
+$footer-volume-seekbar-color: #323538;
+$footer-volume-loaded-color: #8b8bc7;
+$footer-seekbar-thumb-color: #fff;
+$footer-seekbar-loaded-color: #8b8bc7;
 
 //inputs
 $login-form-color: #323538;
@@ -32,17 +38,25 @@ $button-color: #8b8bc7;
 
 // SIZES //
 
-$main-height: calc(100vh - 117px);
+$main-height: calc(100vh - 122px);
 $header-height: 50px;
-$footer-height: 65px;
+$footer-height: 70px;
 $track-height: 60px;
 $submenu-item-height: 40px;
 $submenu-width: 100px;
 $footer-more-bottom: 51px;
-$footer-more-right: 180px;
+$footer-more-right: 228px;
+$footer-seekbar-height: 3px;
+$footer-seekbar-hover-height: 10px;
+$footer-seekbar-thumb-height: 10px;
+$footer-volume-seekbar-height: 5px;
+$footer-volume-width: 120px;
+$footer-volume-seekbar-height: 15px;
+$footer-volume-seekbar-thumb-height: 8px;
 
 // FONTS //
 
+$text-size-huge: 32px;
 $text-size-biggest: 26px;
 $text-size-big: 22px;
 $text-size-normal: 18px;

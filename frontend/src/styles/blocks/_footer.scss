@@ -1,5 +1,7 @@
 .footer {
+    position: relative;
     display: flex;
+    flex-wrap: wrap;
     width: 100%;
     height: $footer-height;
     background-color: $footer-color;
@@ -19,47 +21,51 @@
         align-items: center;
         flex: 5;
         min-width: 200px;
-        margin-left: 100px;
+        margin-left: 80px;
     }
 
-    &__previous {
-        
-    }
-
-    &__play {
-        
-    }
-
-    &__pause {
-        display: none;
-    }
-
-    &__next {
-        
-    }
-
-    &__volume {
-        
-    }
-    
-    &__repeat {
-        
-    }
-
-    &__shuffle {
-        
-    }
-
-    &__queue {
-        
+    &__time {
+        font-size: $text-size-small;
     }
 
     &__audio {
         display: none;
+    }
+
+    &__wrapper {
+        display: flex;
+    }
+
+    &__volume {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        width: $footer-volume-width;
+
+
+        &_seekbar {
+            display: flex;
+            align-items: center;
+            width: 120px;
+            height: $footer-volume-seekbar-height;
+            outline: none;
+        }
+
     }
 }
 
 .fa {
     cursor: pointer;
     margin: 0 10px;
+    color: $fa-color;
+}
+
+.fa-2x {
+    font-size: $text-size-huge;
+}
+
+.control_button {
+    border: none;
+    background-color: transparent;
+    outline: none;
 }

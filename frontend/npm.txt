@@ -7,6 +7,8 @@ npm i --save-dev clean-webpack-plugin
     imagemin-webpack-plugin
 npm install --save-dev redux-saga
 npm install --save-dev redux-devtools-extension
+npm install --save prop-types
+npm install react-slider
 
 when start programm:
 npm start
