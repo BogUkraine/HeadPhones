@@ -27,7 +27,8 @@ class Footer extends Component {
                 songTime: '',
                 songDuration: ''
             },
-            volumeLevel: 80
+			volumeLevel: 80,
+			positionInQueue: 0,
         }
         this.reactAudioPlayer = React.createRef();
         this.updateIsPlaying = this.updateIsPlaying.bind(this);
@@ -37,30 +38,7 @@ class Footer extends Component {
         this.pauseSong = this.pauseSong.bind(this);
         this.onTimeUpdateListener = this.onTimeUpdateListener.bind(this);
         this.updateAudioTime = this.updateAudioTime.bind(this);
-        this.updateVolumeLevel = this.updateVolumeLevel.bind(this)
-        // this.updateToggles = this.updateToggles.bind(this)
-        // this.selectSongFromPlaylist = this.selectSongFromPlaylist.bind(this)
-        // this.setAnalyser = this.setAnalyser.bind(this)
-    }
-
-    static propTypes = {
-        playlist: PropTypes.array,
-        currentSongIndex: PropTypes.number,
-        showVolumeBar: PropTypes.bool,
-        showVisualizerToggle: PropTypes.bool,
-        showPlaylistToggle: PropTypes.bool,
-        playlistIsPlaying: PropTypes.bool,
-        receiveStateUpdates: PropTypes.func
-    }
-    
-    static defaultProps = {
-        currentSongIndex: null,
-        playlist: null,
-        showVisualizerToggle: true,
-        showVolumeBar: true,
-        showPlaylistToggle: true,
-        playlistIsPlaying: false,
-        receiveStateUpdates: null
+        this.updateVolumeLevel = this.updateVolumeLevel.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -88,10 +66,10 @@ class Footer extends Component {
     
     render() {
         return (
-            <footer className="footer">
+            <footer className="footer" id="footer">
                 <audio
                 className="footer__audio"
-                src={this.props.currentTrack.track_link}
+                src={this.props.queue[this.props.currentTrack.index].track_link}
                 ref={this.reactAudioPlayer}
 				onTimeUpdate={this.onTimeUpdateListener}
 				onEnded={this.goNextSong}
@@ -164,22 +142,19 @@ class Footer extends Component {
     }
 
     goPreviousSong() {
-        //this.props.previousTrack = this.props.playlist[this.props.currentSongIndex - 1];
+		this.props.changeCurrentTrack(this.props.queue[this.props.currentTrack.index - 1], this.props.currentTrack.index - 1);
         this.reactAudioPlayer.current.currentTime = 0;
-        //this.setState({ currentSongIndex });
         this.pauseSong();
         this.playSong();
     }
     
     goNextSong() {
-        //this.props.previousTrack = this.props.playlist[this.props.currentSongIndex + 1];
+		this.props.changeCurrentTrack(this.props.queue[this.props.currentTrack.index + 1], this.props.currentTrack.index + 1);
         this.reactAudioPlayer.current.currentTime = 0;
-        //this.setState({ currentSongIndex });
         this.pauseSong();
         this.playSong();
     }
 
-    
     onTimeUpdateListener() {
         let currentTime = this.reactAudioPlayer.current.currentTime;
         let currentDuration = this.reactAudioPlayer.current.duration;
@@ -217,21 +192,31 @@ class Footer extends Component {
 export default connect(
 	state => ({
         currentTrack: state.currentTrack,
-        playlist: state.tracks
+		playlist: state.tracks,
+		queue: state.queue,
 	}),
-	dispatch => ({
-        previousTrack: (data) => {
-			dispatch({
-				type: "PREVIOUS_CURRENT_TRACK",
-				payload: data
-			})
-        },
-        nextTrack: (data) => {
-			dispatch({
-				type: "NEXT_CURRENT_TRACK",
-				payload: data
-			})
-        },
-        
+	({
+		changeCurrentTrack: (track, index) => ({
+            type: "CHANGE_CURRENT_TRACK",
+            payload: {
+                track_id: track.track_id,
+                track_name: track.track_name,
+                track_link: track.track_link,
+                album_name: track.album_name,
+                singer_name: track.singer_name,
+                album_year: track.album_year,
+                album_img: track.album_img,
+                track_time: track.track_time,
+                index: index,
+        	}
+    	}),
+        previousTrack: (data) => ({
+			type: "PREVIOUS_CURRENT_TRACK",
+			payload: data
+		}),
+        nextTrack: (data) => ({
+			type: "NEXT_CURRENT_TRACK",
+			payload: data
+		}),        
     })
   )(Footer);

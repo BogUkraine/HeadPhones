@@ -1,33 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
+
+import fetchPickedPlaylist from '../../actions/fetchPickedPlaylist';
 
 class NavPlaylists extends Component {
 
     onClickItem(id) {
-        axios.get("http://localhost:3210/current/playlist_data", {
-            params: {
-                playlist_id: id
-            }
-        })
-        .then( (response) => {
-            this.props.loadCurrentPlaylist(response.data);
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+        this.props.pickedPlaylist(id);
     }
 
     render() {
-        let i = 0
         return (
-            this.props.currentPlaylists.map((value) => {
+            this.props.playlists.map((value) => {
                 return (
                     <li
                     className="header__submenu_item"
-                    key={i++}
-                    onClick={() => this.onClickItem(value.playlist_id)}
-                    >
+                    key={value.playlist_id}
+                    onClick={() => this.onClickItem(value.playlist_id)}>
                         {value.playlist_name}
                     </li>
                 );
@@ -38,14 +27,9 @@ class NavPlaylists extends Component {
 
 export default connect(
     state => ({
-        currentPlaylists: state.currentPlaylists
+        playlists: state.playlists,
     }),
-    dispatch => ({
-        loadCurrentPlaylist: (data) => {
-			dispatch({
-				type: "LOAD_CURRENT_PLAYLIST_DATA",
-				payload: data
-			})
-		}
-	})
+    {
+        pickedPlaylist: fetchPickedPlaylist,
+    }
   )(NavPlaylists);

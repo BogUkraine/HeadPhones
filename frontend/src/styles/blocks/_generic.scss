@@ -21,6 +21,7 @@ a:active {
 
 .main {
     height: $main-height;
+    transition: height 1.5s;
 }
 
 .button {

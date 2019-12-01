@@ -1,6 +1,7 @@
 const initialState = {
     track_id: 1,
-    track_link: ''
+    track_link: '',
+    index: 0,
 };
 
 export default function currentTrack (state = initialState, action) {

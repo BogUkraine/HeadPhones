@@ -1,11 +1,11 @@
 .home {
     display: flex;
     flex-wrap: nowrap;
-    height: $main-height;
+    height: 100%;
 
     &__left {
         flex: 1;
-        margin: 10px 0 0 10px;
+        margin-left: 10px;
     }
 
     &__right {

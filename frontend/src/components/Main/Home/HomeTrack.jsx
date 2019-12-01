@@ -1,9 +1,9 @@
 import React from 'react';
 import time from '../../../functions/time.js';
 
-const HomeTrack = (({track, album_img, track_name, singer_name, album_name, album_year, track_time, change_track}) => {
+const HomeTrack = (({track, album_img, track_name, singer_name, album_name, album_year, track_time, change_track, index}) => {
     return (
-        <div className="common__track" onClick={() => change_track(track)}>
+        <div className="common__track" onClick={() => change_track(track, index)}>
             <img className="common__track_img" src={album_img} alt="album" />
             <div className="common__track_wrapper">
                 <span className="common__track_name">{track_name}</span>

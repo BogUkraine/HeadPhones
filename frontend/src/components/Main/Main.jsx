@@ -7,7 +7,7 @@ import Playlist from "./Playlist/Playlist";
 
 const Main = () => {
 	return (
-        <main className="main">
+        <main className="main" id="main">
             <Route path="/home" component={ Home }></Route>
             <Route path="/library" component={ Library }></Route>
             <Route path="/playlist" component={ Playlist }></Route>

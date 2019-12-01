@@ -4,43 +4,27 @@ import { connect } from 'react-redux';
 import HomeLeft from './HomeLeft';
 import HomeRight from './HomeRight';
 
-import axios from 'axios';
+import fetchPlaylists from '../../../actions/fetchPlaylists';
+import fetchQuote from '../../../actions/fetchQuote';
+import fetchTopTracks from '../../../actions/fetchTopTracks';
 
 class Home extends Component {
-
+    constructor(props){
+        super(props);
+        this.state = {
+            queue: [],
+        }
+    }
     componentDidMount() {
+        this.props.fetchPlaylists(this.props.user.user_id);
+        this.props.fetchQuote();
+        this.props.fetchTopTracks();
+    }
 
-        axios.get("http://localhost:3210/singers")
-        .then( (response) => {
-            this.props.loadSingers(response.data);
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+    componentWillUpdate() {
+    }
 
-        axios.get("http://localhost:3210/albums")
-        .then( (response) => {
-            this.props.loadAlbums(response.data);
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
-
-        axios.get("http://localhost:3210/tracks/joined")
-        .then( (response) => {
-            this.props.loadTracks(response.data);
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
-
-        axios.get("http://localhost:3210/playlists")
-        .then( (response) => {
-            this.props.loadPlaylists(response.data);
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+    componentWillUnmount() {
     }
 
 
@@ -56,32 +40,17 @@ class Home extends Component {
 
 export default connect(
 	state => ({
-	  testUser: state.users
-	}),
-	dispatch => ({
-		loadTracks: (data) => {
-			dispatch({
-				type: "LOAD_TRACKS",
-				payload: data
-			})
-        },
-        loadAlbums: (data) => {
-			dispatch({
-				type: "LOAD_ALBUMS",
-				payload: data
-			})
-        },
-        loadSingers: (data) => {
-			dispatch({
-				type: "LOAD_SINGERS",
-				payload: data
-			})
-        },
-        loadPlaylists: (data) => {
-			dispatch({
-				type: "LOAD_PLAYLISTS",
-				payload: data
-			})
-		}
-	})
+        user: state.user,
+        queueTop: state.tracks,
+        checkerQueue: state.checkerQueue,
+    }),
+    {
+        fetchPlaylists: fetchPlaylists,
+        fetchQuote: fetchQuote,
+        fetchTopTracks: fetchTopTracks,
+        loadTracks: (data) => ({
+            type: "LOAD_TRACKS",
+            payload: data
+        })
+    }
   )(Home);

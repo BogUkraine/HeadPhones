@@ -6,7 +6,7 @@ class Username extends Component {
     render() {
         return (
             <div className="header__username">
-                <span>{this.props.currentUser.user_name}</span>
+                <span>{this.props.user.user_login}</span>
             </div>
         );
     }
@@ -14,7 +14,7 @@ class Username extends Component {
 
 export default connect(
     state => ({
-        currentUser: state.currentUser
+        user: state.user
     }),
-    dispatch => ({})
+    {}
   )(Username);
