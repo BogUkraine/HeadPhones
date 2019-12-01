@@ -138,19 +138,28 @@ class Footer extends Component {
     pauseSong() {
         this.reactAudioPlayer.current.pause()
         this.setState({ playlistIsPlaying: false })
-        //this.props.receiveStateUpdates({ playlistIsPlaying: false })
     }
 
     goPreviousSong() {
-		this.props.changeCurrentTrack(this.props.queue[this.props.currentTrack.index - 1], this.props.currentTrack.index - 1);
+		if(this.props.currentTrack.index == 0){
+			this.props.changeCurrentTrack(this.props.queue[this.props.queue.length - 1], this.props.queue.length - 1);
+		}
+		else {
+			this.props.changeCurrentTrack(this.props.queue[this.props.currentTrack.index - 1], this.props.currentTrack.index - 1);
+		}
         this.reactAudioPlayer.current.currentTime = 0;
         this.pauseSong();
         this.playSong();
     }
     
     goNextSong() {
-		this.props.changeCurrentTrack(this.props.queue[this.props.currentTrack.index + 1], this.props.currentTrack.index + 1);
-        this.reactAudioPlayer.current.currentTime = 0;
+		if(this.props.currentTrack.index == this.props.queue.length - 1){
+			this.props.changeCurrentTrack(this.props.queue[0], 0);
+		}
+		else {
+			this.props.changeCurrentTrack(this.props.queue[this.props.currentTrack.index + 1], this.props.currentTrack.index + 1);
+		}
+		this.reactAudioPlayer.current.currentTime = 0;
         this.pauseSong();
         this.playSong();
     }

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import HomeTrack from './HomeTrack';
 
 class HomeList extends Component {
-    changeTrack(track, index) {
+    changeTrack(track, index) {        
         if(this.props.checkQueue){
             this.props.queue(this.props.tracks);
             this.props.changeCheckerTracks(false);
@@ -13,7 +13,7 @@ class HomeList extends Component {
         const main = document.getElementById("main");
         footer.style.display = "flex";
         main.style.height = "calc(100vh - 122px)";
-        this.props.changeCurrentTrack(track, index);
+        this.props.changeCurrentTrack(track, index);        
     }
 
     render() {

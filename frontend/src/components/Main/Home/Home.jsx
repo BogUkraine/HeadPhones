@@ -21,10 +21,16 @@ class Home extends Component {
         this.props.fetchTopTracks();
     }
 
-    componentWillUpdate() {
-    }
-
-    componentWillUnmount() {
+    componentDidUpdate() {
+        const deepEqual = (arrTracks, arrQueue) => {
+            for (let i = 0; i < arrTracks.length; i++){
+                if (JSON.stringify(arrTracks[i]) !== JSON.stringify(arrQueue[i])){
+                    this.props.changeCheckerTracks(true);
+                    break;
+                }
+            }
+        }
+        deepEqual(this.props.tracks, this.props.queueData);
     }
 
 
@@ -43,11 +49,17 @@ export default connect(
         user: state.user,
         queueTop: state.tracks,
         checkerQueue: state.checkerQueue,
+        tracks: state.tracks,
+        queueData: state.queue,
     }),
     {
         fetchPlaylists: fetchPlaylists,
         fetchQuote: fetchQuote,
         fetchTopTracks: fetchTopTracks,
+        changeCheckerTracks: (data) => ({
+            type: "CHANGE_CHECKER",
+            payload: data
+        }),
         loadTracks: (data) => ({
             type: "LOAD_TRACKS",
             payload: data
