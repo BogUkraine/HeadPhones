@@ -58,7 +58,7 @@ app.get("/genres", function(req, res){
 		res.json(data);
 	});
 });
-
+/*
 app.get("/playlists", function(req, res){
 	pool.query("SELECT * FROM playlists", function(err, data) {
 		if(err) {
@@ -67,7 +67,7 @@ app.get("/playlists", function(req, res){
 		res.json(data);
 		//console.log(data);
 	});
-});
+});*/
 
 app.get("/singers", function(req, res){
 	pool.query("SELECT * FROM singers", function(err, data) {
@@ -107,23 +107,71 @@ app.get("/tracks/joined", function(req, res){
 	});
 });
 
-//    POST_METHODS     //
-
-app.post("/users", function(req, res){
+app.get("/checkUser", function(req, res){
 	const user = {
-		user_id: req.body.user_id,
-		user_name: req.body.user_name,
-		user_password: req.body.user_password,
-		user_login: req.body.user_login
+		login: req.query.user_login,
+		password: req.query.user_password
 	}
 
-	pool.query('INSERT INTO t_user SET ?', user, (error, result) => {
-        if (error) throw error;
-    });
-	res.send(user);
+	pool.query(
+		`SELECT *
+		FROM users
+		WHERE (users.user_login = '${user.login}' AND
+		users.user_password = '${user.password}')`, user,
+		function(err, data) {
+		if(err) {
+			return console.log(err);
+		}
+		res.json(data);
+	});
 });
 
-app.post("/playlists", function(req, res){
+app.get("/playlists", function(req, res){
+	const user_id = req.query.user_id;
+
+	pool.query(
+		`SELECT
+		u.user_id, u.user_login,
+		p.playlist_id, p.playlist_name,
+		t.track_id,
+		a.album_name,
+		s.singer_name,
+		g.genre_name
+		FROM users u JOIN playlists p USING(user_id)
+		JOIN tracks t USING(track_id)
+		JOIN albums a USING(album_id)
+		JOIN singers s USING(singer_id)
+		JOIN genres g USING(genre_id)
+		WHERE u.user_id = ${user_id}`,
+		user_id,
+		function(err, data) {
+		if(err) {
+			return console.log(err);
+		}
+		res.json(data);
+	});
+});
+
+//    POST_METHODS     //
+
+app.post("/addUser", function(req, res){
+	const user = {
+		login: req.body.user_login,
+		password: req.body.user_password
+	}
+	pool.query(
+		`INSERT INTO users (user_login, user_password)
+		VALUES ('${user.login}', '${user.password}')`,
+		user,
+		function(err, data) {
+		if(err) {
+			return console.log(err);
+		}
+		res.json(data);
+	});
+});
+
+app.post("/addPlaylist", function(req, res){
 	const playlist = {
 		playlist_id: req.body.playlist_id,
 		user_id: req.body.user_id,

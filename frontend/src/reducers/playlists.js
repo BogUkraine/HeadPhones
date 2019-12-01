@@ -3,12 +3,12 @@ const initialState = [
 
 export default function playlists (state = initialState, action) {
   	switch(action.type){
-		case('LOAD_PLAYLISTS'): {
+		case('FETCH_PLAYLISTS'): {
 			return [
 				...action.payload
 			]
 		}
-		case('GET_CURRENT_PLAYLISTS'): {
+		case('FETCHED_PLAYLISTS_SUCCESS'): {
 			return action.payload
 		}
 		default: {

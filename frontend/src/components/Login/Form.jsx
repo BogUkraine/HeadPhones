@@ -1,127 +1,29 @@
-import React, {Component} from 'react';
-import axios from 'axios';
-import {connect} from 'react-redux';
+import React from 'react';
 
-import LoginField from './LoginField';
-import PasswordField from './PasswordField';
-import ButtonsEnter from './ButtonsEnter';
-import ButtonsCreate from './ButtonsCreate';
+import FieldLoginEnter from './FieldLoginEnter';
+import FieldLoginCreate from './FieldLoginCreate';
+import FieldPasswordEnter from './FieldPasswordEnter';
+import FieldPasswordCreate from './FieldPasswordCreate';
+import ButtonsLoginEnter from './ButtonsLoginEnter';
+import ButtonsCreateEnter from './ButtonsCreateEnter';
 
-class Form extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            users: [
-                {
-                    user_id: "",
-                    user_name: "",
-                    user_password: "",
-                    user_login: ""
-                }
-            ],
-            inputLogin: "",
-            inputPass: "",
-            inputName: ""
-        }
-
-        this.onChangeLogin = this.onChangeLogin.bind(this);
-        this.onChangePass = this.onChangePass.bind(this);
-        this.onChangeName = this.onChangeName.bind(this);
-    }
-
-    componentDidMount() {
-        axios.get("http://localhost:3210/users")
-            .then( (response) => {
-                this.setState({
-                    users: response.data,
-                });
-                console.log(this.state.users);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-    }
-
-    onChangeLogin (event) {
-        this.setState({inputLogin: event.target.value});
-        console.log(this.state.inputLogin);
-    }
-
-    onChangePass (event) {
-        this.setState({inputPass: event.target.value});
-        console.log(this.state.inputPass);
-    }
-
-    onChangeName (event) {
-        this.setState({inputName: event.target.value});
-        console.log(this.state.inputName);
-    }
-
-
-    render () {
-        return (
+const Form = () => {
+    return (
         <div className="login__right">
             <form className="form__enter form" id="formLogin">
                 <h2 className="form__title">Login to account</h2>
-
-                    <LoginField funcChange={this.onChangeLogin}/>
-                    <PasswordField funcChange={this.onChangePass}/>
-
-                    <ButtonsEnter
-                        login={this.state.inputLogin}
-                        pass={this.state.inputPass}
-                        users={this.state.users}
-                    />
+                <FieldLoginEnter />
+                <FieldPasswordEnter />
+                <ButtonsLoginEnter />
             </form>
             <form className="form__create form" id="formCreate">
                 <h2 className="form__title">Create account</h2>
-                <label className="form__login form__label">
-                    <span className="form__description">Login:</span>
-                    <input
-                    className="form__login_field field"
-                    type="text"
-                    id="loginEnter"
-                    onChange={this.onChangeLogin}
-                    />
-                    </label>
-                        <label className="form__password form__label">
-                        <span className="form__description">Password:</span>
-                        <input
-                        className="form__password_field field"
-                        type="password"
-                        onChange={this.onChangePass}
-                        />
-                        </label>
-                            <label className="form__name form__label">
-                            <span className="form__description">UserName:</span>
-                            <input
-                            className="form__name_field field"
-                            type="text"
-                            onChange={this.onChangeName}
-                            />
-                            </label>
-                <ButtonsCreate
-                    login={this.state.inputLogin}
-                    pass={this.state.inputPass}
-                    name={this.state.inputName}
-                    users={this.state.users}
-                />
+                <FieldLoginCreate />
+                <FieldPasswordCreate />
+                <ButtonsCreateEnter />
             </form>
         </div>
-        );
-    }
+    );
 }
 
-export default connect(
-	state => ({
-	  testUser: state.currentUser
-	}),
-	dispatch => ({
-        addError: (data) => {
-			dispatch({
-				type: "ADD_ERROR",
-				payload: data
-			})
-		}
-	})
-  )(Form);
+export default Form;
