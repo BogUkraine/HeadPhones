@@ -1,0 +1,10 @@
+.queue {
+    display: none;
+    position: absolute;
+    top: calc(100vh - 122px);
+    bottom: 70px;
+    width: 100%;
+    height: calc(100vh - 122px);
+    transition: top 0.5s;
+    background: $background-color;
+}

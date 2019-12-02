@@ -32,7 +32,6 @@ app.get("/quotes", function(req, res){
 });
 
 app.get("/tracks/joined", function(req, res){
-
 	pool.query(
 		`SELECT
 		tr.track_id, tr.track_link, tr.track_name, tr.track_time,
@@ -70,9 +69,20 @@ app.get("/checkUser", function(req, res){
 app.get("/playlists", function(req, res){
 	const user_id = req.query.user_id;
 	pool.query(
-		`SELECT DISTINCT playlist_id, playlist_name
-		FROM playlists
+		`SELECT DISTINCT pm.playlist_id, p.playlist_name
+		FROM playlists_main pm JOIN playlists p USING(playlist_id)
 		WHERE user_id = ${user_id}`, user_id,
+		function(err, data) {
+		if(err) {
+			return console.log(err);
+		}
+		res.json(data);
+	});
+});
+
+app.get("/playlistsCount", function(req, res) {
+	pool.query(
+		`SELECT COUNT(*) as "count" FROM playlists`,
 		function(err, data) {
 		if(err) {
 			return console.log(err);
@@ -138,6 +148,35 @@ app.get("/topTracks", function(req, res){
 	});
 });
 
+app.get("/pickedPlaylist", function(req, res){
+	const tracks = {
+		user_id: req.query.user_id,
+		playlist_id: req.query.playlist_id
+	}
+	
+	pool.query(
+		`SELECT
+		p.playlist_name,
+		t.track_id, t.track_name, t.track_link, t.track_time,
+		a.album_name, a.album_img, a.album_year,
+		s.singer_name,
+		g.genre_name
+		FROM playlists p
+		JOIN playlists_main pm USING(playlist_id)
+		JOIN tracks t USING(track_id)
+		JOIN albums a USING(album_id)
+		JOIN singers s USING(singer_id)
+		JOIN genres g USING(genre_id)
+		WHERE user_id = ${tracks.user_id} AND playlist_id = ${tracks.playlist_id}`,
+		tracks,
+		function(err, data) {
+		if(err) {
+			return console.log(err);
+		}
+		res.json(data);
+	});
+});
+
 //    POST_METHODS     //
 
 app.post("/addUser", function(req, res){
@@ -153,23 +192,29 @@ app.post("/addUser", function(req, res){
 		if(err) {
 			return console.log(err);
 		}
-		res.json(data);
 	});
 });
 
 app.post("/addPlaylist", function(req, res){
-	const playlist = {
-		playlist_id: req.body.playlist_id,
-		user_id: req.body.user_id,
-		track_id: req.body.track_id,
-		playlist_name: req.body.playlist_name
-	}
+	const playlist_name = req.body.playlist_name;
 
-	pool.query("INSERT INTO playlists SET ?", playlist, function(err, data) {
+	pool.query(`INSERT INTO playlists SET playlist_name = "${playlist_name}"`, playlist_name, function(err, data) {
 		if(err) {
 			return console.log(err);
 		}
-		res.send(playlist);
+	});
+});
+
+app.post("/addPlaylist_main", function(req, res){
+	const playlist = {
+		user_id: req.body.user_id,
+		playlist_id: req.body.playlist_id
+	}
+
+	pool.query(`INSERT INTO playlists_main SET user_id = "${playlist.user_id}", playlist_id= "${playlist.playlist_id}"`, playlist, function(err, data) {
+		if(err) {
+			return console.log(err);
+		}
 	});
 });
 
@@ -183,12 +228,13 @@ app.get("/current/tracks", function(req, res){
 	pool.query(
 		`SELECT
 		u.user_id, u.user_login,
-		p.playlist_id, p.playlist_name,
+		pm.playlist_id, p.playlist_name,
 		t.track_id,
 		a.album_name,
 		s.singer_name,
 		g.genre_name
-		FROM users u JOIN playlists p USING(user_id)
+		FROM users u JOIN playlists_main pm USING(user_id)
+		JOIN playlists p USING(playlist_id)
 		JOIN tracks t USING(track_id)
 		JOIN albums a USING(album_id)
 		JOIN singers s USING(singer_id)

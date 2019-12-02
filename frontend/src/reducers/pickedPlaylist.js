@@ -1,17 +1,16 @@
-const initialState = [{
-	playlist_id: 1,
-	playlist_name: 'kek',
-	track_id: 1
-}];
+const initialState = [];
 
 export default function pickedPlaylist (state = initialState, action) {
     switch(action.type){
 		case('FETCH_PICKED_PLAYLIST'): {
-			return action.payload
+			return [action.payload]
         }
         case('FETCHED_PICKED_PLAYLIST_SUCCESS'): {
-            return action.data
-        }
+            return action.payload
+		}
+		case('FETCH_EMPTY_PICKED_PLAYLIST'): {
+			return state
+		}
         default: {
 			return state;
 		}

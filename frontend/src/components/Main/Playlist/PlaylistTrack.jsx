@@ -5,7 +5,7 @@ const PlaylistTracks = (({track_name, singer_name, album_name, album_year, album
     return (
         <div className="playlist__track">
             <div className="playlist__track_title">
-                <div className="playlist__track_img" src={album_img}></div>
+                <img className="playlist__track_img" src={album_img} />
                 <span className="playlist__track_name">{track_name}</span>
             </div>
             <div className="playlist__track_description">

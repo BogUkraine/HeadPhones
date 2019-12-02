@@ -1,83 +1,25 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import {connect} from 'react-redux';
-import axios from 'axios';
 
+import addPlaylist from '../../actions/addPlaylist';
 import NavPlaylists from './NavPlaylists';
+import fetchPickedPlaylist from '../../actions/fetchPickedPlaylist';
+import fetchPlaylists from '../../actions/fetchPlaylists';
 
 class Nav extends Component {
     constructor(props){
         super(props);
         this.onClickCreate = this.onClickCreate.bind(this);
-        this.onClickItem = this.onClickItem.bind(this);
     }
 
     onClickCreate() {
-        var arr = [];
-        for ( let i = 0; i < this.props.playlists.length; i++) {
-            arr[i] = this.props.playlists[i].playlist_id;
-        }
-
-        let newId = Math.max.apply(null, arr)+1;
-
-        axios.post("http://localhost:3210/playlists", {
-            playlist_id: newId,
-            user_id: this.props.currentUser.user_id,
-            track_id: 1,
-            playlist_name: "Playlist_name"
-        })
-        .then( (response) => {
-
-            axios.get("http://localhost:3210/playlists")
-            .then( (response) => {
-                this.props.loadPlaylists(response.data);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-
-            axios.get("http://localhost:3210/current/playlists", {
-                params: {
-                    userInfo: this.props.currentUser.user_id
-                }
-            })
-            .then( (response) => {
-                this.props.loadCurrentPlaylists(response.data);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-
-            axios.get("http://localhost:3210/current/playlist_data", {
-                params: {
-                    playlist_id: newId
-                }
-            })
-            .then( (response) => {
-                this.props.loadCurrentPlaylist(response.data);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-
-        })
-        .catch(error => {
-            console.log(error.response);
-            });
-    }
-
-    onClickItem() {
-        axios.get("http://localhost:3210/current/playlist_data", {
-            params: {
-                playlist_id: this.props.currentPlaylists[0].playlist_id
-            }
-        })
-        .then( (response) => {
-            this.props.loadCurrentPlaylist(response.data);
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+        this.props.addPlaylist(this.props.user.user_id, this.props.playlistsCount.count);
+        this.props.pickedPlaylist(this.props.user.user_id, this.props.playlistsCount.count);
+        setTimeout(()=>{
+            this.props.fetchPlaylistsCount();
+            this.props.fetchPlaylists(this.props.user.user_id);
+        }, 500)
     }
 
     render() {
@@ -99,16 +41,17 @@ class Nav extends Component {
                         </li>
                     </NavLink>
                     <NavLink to="/playlist">
-                        <li className="header__topmenu_item" onClick={this.onClickItem}>
+                        <li className="header__topmenu_item">
                             <span className="header__topmenu_text">Playlist</span>
                             <ul className="header__submenu">
                                 <NavPlaylists />
-                                <li
-                                className="header__submenu_item"
-                                onClick={this.onClickCreate}
-                                >
+                                {(this.props.playlists.length < 3)
+                                ?<li className="header__submenu_item"
+                                onClick={this.onClickCreate}>
                                     CreatePlaylist
                                 </li>
+                                : null
+                                }
                             </ul>
                         </li>
                     </NavLink>
@@ -120,28 +63,19 @@ class Nav extends Component {
 
 export default connect(
 	state => ({
-        currentUser: state.currentUser,
+        user: state.user,
         playlists: state.playlists,
-        currentPlaylists: state.currentPlaylists
-	}),
-	dispatch => ({
-        loadCurrentPlaylist: (data) => {
-			dispatch({
-				type: "LOAD_CURRENT_PLAYLIST_DATA",
-				payload: data
-			})
-        },
-        loadCurrentPlaylists: (data) => {
-			dispatch({
-				type: "LOAD_CURRENT_PLAYLISTS",
-				payload: data
-			})
-        },
-        loadPlaylists: (data) => {
-			dispatch({
-				type: "LOAD_PLAYLISTS",
-				payload: data
-			})
-		}
-	})
-  )(Nav);
+        playlistsCount: state.playlistsCount,
+    }),
+    {
+        addPlaylist: addPlaylist,
+        fetchPlaylists: fetchPlaylists,
+        fetchPlaylistsCount: () => ({
+            type: "FETCH_PLAYLISTS_COUNT"
+        }),
+        pickedPlaylist: () => ({
+            type: "FETCH_EMPTY_PICKED_PLAYLIST"
+        }),
+        fetchPickedPlaylist: fetchPickedPlaylist,
+    }
+)(Nav);

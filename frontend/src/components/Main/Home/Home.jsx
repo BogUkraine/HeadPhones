@@ -7,6 +7,7 @@ import HomeRight from './HomeRight';
 import fetchPlaylists from '../../../actions/fetchPlaylists';
 import fetchQuote from '../../../actions/fetchQuote';
 import fetchTopTracks from '../../../actions/fetchTopTracks';
+import playlistsCount from '../../../actions/playlistsCount';
 
 class Home extends Component {
     constructor(props){
@@ -19,6 +20,7 @@ class Home extends Component {
         this.props.fetchPlaylists(this.props.user.user_id);
         this.props.fetchQuote();
         this.props.fetchTopTracks();
+        this.props.playlistsCount();
     }
 
     componentDidUpdate() {
@@ -32,7 +34,6 @@ class Home extends Component {
         }
         deepEqual(this.props.tracks, this.props.queueData);
     }
-
 
     render() {
         return (
@@ -56,6 +57,7 @@ export default connect(
         fetchPlaylists: fetchPlaylists,
         fetchQuote: fetchQuote,
         fetchTopTracks: fetchTopTracks,
+        playlistsCount: playlistsCount,
         changeCheckerTracks: (data) => ({
             type: "CHANGE_CHECKER",
             payload: data

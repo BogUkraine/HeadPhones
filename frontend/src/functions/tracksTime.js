@@ -1,7 +1,9 @@
 const tracksTime = (data) => {
     let time = 0;
-    for( let i = 0; i < data.length; i++ ) {
-        time += data[i].track_time;
+    if(data != undefined){
+        for( let i = 0; i < data.length; i++ ) {
+            time += data[i].track_time;
+        }
     }
     return timeDelimiter(time);
 }

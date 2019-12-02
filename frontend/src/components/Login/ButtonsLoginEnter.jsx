@@ -32,16 +32,19 @@ class ButtonsLoginEnter extends Component {
             if(fieldPasswordEnter.checkValidity() && fieldPasswordEnter.value !== '') {
                 fieldPasswordEnter.style.borderColor = "#ddd";
                 passwordWarning.style.display = "none";
-                this.props.user(fieldLoginEnter.value, fieldPasswordEnter.value);   
-
                 
-                if(this.props.checkedUser.user_id === "error"){
+                this.props.user(fieldLoginEnter.value, fieldPasswordEnter.value);
+                console.log('Snizu pod fucn', this.props.checkedUser);
+                
+                
+                if(Promise.resolve(this.props.checkedUser.user_id) !== "initial"){
                     event.preventDefault();
-                    alert("Wrong Login or Password");
+                    console.log(this.props.checkedUser);
+                    console.log('ok))0)');   
                 }
                 else {
-                    console.log(this.props.checkedUser);
-                    console.log('ok))0)');
+                    event.preventDefault();
+                    alert("Wrong Login or Password");
                 }
 
             }

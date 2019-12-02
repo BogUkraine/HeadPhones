@@ -4,9 +4,16 @@ import { connect } from 'react-redux';
 import fetchPickedPlaylist from '../../actions/fetchPickedPlaylist';
 
 class NavPlaylists extends Component {
+    constructor(props){
+        super(props)
 
-    onClickItem(id) {
-        this.props.pickedPlaylist(id);
+        this.onClickItem = this.onClickItem.bind(this);
+    }
+
+    onClickItem(user_id, playlist_id) {
+        console.log(user_id);
+        console.log(playlist_id);
+        this.props.pickedPlaylist(user_id, playlist_id);
     }
 
     render() {
@@ -16,7 +23,7 @@ class NavPlaylists extends Component {
                     <li
                     className="header__submenu_item"
                     key={value.playlist_id}
-                    onClick={() => this.onClickItem(value.playlist_id)}>
+                    onClick={() => this.onClickItem(this.props.user.user_id, value.playlist_id)}>
                         {value.playlist_name}
                     </li>
                 );
@@ -28,6 +35,7 @@ class NavPlaylists extends Component {
 export default connect(
     state => ({
         playlists: state.playlists,
+        user: state.user,
     }),
     {
         pickedPlaylist: fetchPickedPlaylist,

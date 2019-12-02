@@ -2,20 +2,22 @@ import { combineReducers } from 'redux';
 
 import tracks from './tracks';
 import playlists from './playlists';
-import currentPlaylist from './currentPlaylist';
+import pickedPlaylist from './pickedPlaylist';
 import currentTrack from './currentTrack';
 import user from './user';
 import quote from './quote';
 import queue from './queue';
 import checkerQueue from './checkerQueue';
+import playlistsCount from './playlistsCount';
 
 export default combineReducers({
     user,
-    playlists,
     tracks,
-    currentPlaylist,
-    currentTrack,
     quote,
+    playlistsCount,
+    playlists,
+    pickedPlaylist,
+    currentTrack,
     checkerQueue,
     queue,
 })

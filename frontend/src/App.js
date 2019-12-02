@@ -9,15 +9,16 @@ import Header from './components/Header/Header';
 import Main from './components/Main/Main';
 import Footer from './components/Footer/Footer';
 import Login from './components/Login/Login';
+import Queue from './components/Queue/Queue';
 
 class App extends Component {
 	render() {
-		console.log("render redux", this.props.testStore);
 		return (
 			<BrowserRouter>
 				<Route exact path="/login" component={ Login }></Route>
 				<Header />
 				<Main />
+				<Queue />
 				<Footer />
 			</BrowserRouter>
 		);

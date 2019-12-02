@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 
-import QueueTrack from './QueueTrack';
+//import QueueTrack from './QueueTrack';
 
 class QueueList extends Component {
     render() {
