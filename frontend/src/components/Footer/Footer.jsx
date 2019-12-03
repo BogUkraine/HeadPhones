@@ -201,8 +201,8 @@ class Footer extends Component {
 export default connect(
 	state => ({
         currentTrack: state.currentTrack,
-		playlist: state.tracks,
-		queue: state.queue,
+        playlist: state.queue,
+        queue: state.queue,
 	}),
 	({
 		changeCurrentTrack: (track, index) => ({

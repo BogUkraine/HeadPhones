@@ -12,9 +12,6 @@ import playlistsCount from '../../../actions/playlistsCount';
 class Home extends Component {
     constructor(props){
         super(props);
-        this.state = {
-            queue: [],
-        }
     }
     componentDidMount() {
         this.props.fetchPlaylists(this.props.user.user_id);

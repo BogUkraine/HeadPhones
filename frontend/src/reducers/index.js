@@ -14,10 +14,10 @@ export default combineReducers({
     user,
     tracks,
     quote,
+    queue,
     playlistsCount,
     playlists,
     pickedPlaylist,
     currentTrack,
     checkerQueue,
-    queue,
 })

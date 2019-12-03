@@ -7,4 +7,27 @@
     height: calc(100vh - 122px);
     transition: top 0.5s;
     background: $background-color;
+
+    &__left {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex: 1;
+    }
+
+    &__image {
+        width: 400px;
+        height: 400px;
+        margin: 20px;
+    }
+
+    &__right {
+        flex: 1;
+    }
+
+    &__list {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 20px 10px 20px 0;
+    }
 }

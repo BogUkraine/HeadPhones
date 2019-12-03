@@ -19,7 +19,7 @@ class Nav extends Component {
         setTimeout(()=>{
             this.props.fetchPlaylistsCount();
             this.props.fetchPlaylists(this.props.user.user_id);
-        }, 500)
+        }, 200)
     }
 
     render() {
@@ -40,9 +40,9 @@ class Nav extends Component {
                         </span>
                         </li>
                     </NavLink>
-                    <NavLink to="/playlist">
-                        <li className="header__topmenu_item">
-                            <span className="header__topmenu_text">Playlist</span>
+                    <li className="header__topmenu_item">
+                        <span className="header__topmenu_text">Playlists</span>
+                        <NavLink to="/playlist" className="header__submenu_link">
                             <ul className="header__submenu">
                                 <NavPlaylists />
                                 {(this.props.playlists.length < 3)
@@ -53,8 +53,9 @@ class Nav extends Component {
                                 : null
                                 }
                             </ul>
-                        </li>
-                    </NavLink>
+                        </NavLink>
+                    </li>
+                    
                 </ul>
             </div>
         );
