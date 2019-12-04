@@ -9,9 +9,16 @@ import fetchQuote from './fetchQuote';
 import fetchTopTracks from './fetchTopTracks';
 import addPlaylist from './addPlaylist';
 import fetchPlaylistsCount from './fetchPlaylistsCount';
+import changePlaylistName from './changePlaylistName';
+/*
+import {changeFooterSongPercent,
+    changeFooterSongTime,
+    changeFooterVolumeLevel,
+    changeFooterSongDuration} from './changeFooter';
+*/
 
 function* checkUserWatcher() {
-    //yield takeLatest('CHECK_USER', fetchUser);
+    yield takeLatest('CHECK_USER', fetchUser);
     yield takeLatest('ADD_USER', addUser);
 }
 
@@ -30,11 +37,21 @@ function* fetchPlaylistsCountWatcher() {
 function* playlistsWatcher() {
     yield takeLatest('FETCH_PLAYLISTS', fetchPlaylists);
     yield takeLatest('ADD_PLAYLIST', addPlaylist);
+    yield takeLatest('CHANGE_PLAYLIST_NAME', changePlaylistName);
 }
 
 function* fetchPickedPlaylistWatcher() {
     yield takeLatest('FETCH_PICKED_PLAYLIST', fetchPickedPlaylist);
 }
+
+/*
+function* fetchFooterWatcher() {
+    yield takeLatest('CHANGE_FOOTER_SONG_PERCENT', changeFooterSongPercent);
+    yield takeLatest('CHANGE_FOOTER_SONG_TIME', changeFooterSongTime);
+    yield takeLatest('CHANGE_FOOTER_VOLUME_LEVEL', changeFooterVolumeLevel);
+    yield takeLatest('CHANGE_FOOTER_SONG_DURATION', changeFooterSongDuration);
+}
+*/
 
 export default function* rootSaga() {
     yield all([
@@ -44,5 +61,6 @@ export default function* rootSaga() {
         fetchQuoteWatcher(),
         fetchTopTracksWathcer(),
         fetchPlaylistsCountWatcher(),
+        //fetchFooterWatcher(),
     ]);
 }

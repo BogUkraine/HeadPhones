@@ -5,7 +5,7 @@ const PlaylistTracks = (({track, change_track, track_name, singer_name, album_na
     return (
         <div className="playlist__track" onClick={() => change_track(track, index)}>
             <div className="playlist__track_title">
-                <img className="playlist__track_img" src={album_img} />
+                <img className="playlist__track_img" src={album_img} alt="album"/>
                 <span className="playlist__track_name">{track_name}</span>
             </div>
             <div className="playlist__track_description">

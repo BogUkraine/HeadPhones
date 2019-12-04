@@ -1,6 +1,7 @@
 const initialState = [
-    'My home playlist',
-    'My work playlist'
+    {
+		track_id: 1
+	}
 ];
 
 export default function tracks(state = initialState, action) {

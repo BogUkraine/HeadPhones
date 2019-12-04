@@ -10,9 +10,6 @@ import fetchTopTracks from '../../../actions/fetchTopTracks';
 import playlistsCount from '../../../actions/playlistsCount';
 
 class Home extends Component {
-    constructor(props){
-        super(props);
-    }
     componentDidMount() {
         this.props.fetchPlaylists(this.props.user.user_id);
         this.props.fetchQuote();

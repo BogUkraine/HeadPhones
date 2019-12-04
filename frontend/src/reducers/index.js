@@ -9,6 +9,7 @@ import quote from './quote';
 import queue from './queue';
 import checkerQueue from './checkerQueue';
 import playlistsCount from './playlistsCount';
+import footer from './footer';
 
 export default combineReducers({
     user,
@@ -20,4 +21,5 @@ export default combineReducers({
     pickedPlaylist,
     currentTrack,
     checkerQueue,
+    footer,
 })

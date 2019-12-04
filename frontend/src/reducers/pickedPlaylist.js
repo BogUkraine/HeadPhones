@@ -1,15 +1,18 @@
-const initialState = [];
+const initialState = [{}];
 
 export default function pickedPlaylist (state = initialState, action) {
     switch(action.type){
 		case('FETCH_PICKED_PLAYLIST'): {
-			return [action.payload]
+			return [action.payload];
         }
         case('FETCHED_PICKED_PLAYLIST_SUCCESS'): {
-            return action.payload
+            return action.payload;
 		}
 		case('FETCH_EMPTY_PICKED_PLAYLIST'): {
-			return state
+			return state;
+		}
+		case('CHANGE_PLAYLIST_NAME'): {
+			return state;
 		}
         default: {
 			return state;

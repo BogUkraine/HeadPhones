@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
+import axios from 'axios';
 
 import checkUser from '../../actions/checkUser';
 
@@ -33,20 +34,38 @@ class ButtonsLoginEnter extends Component {
                 fieldPasswordEnter.style.borderColor = "#ddd";
                 passwordWarning.style.display = "none";
                 
-                this.props.user(fieldLoginEnter.value, fieldPasswordEnter.value);
-                console.log('Snizu pod fucn', this.props.checkedUser);
-                
-                
-                if(Promise.resolve(this.props.checkedUser.user_id) !== "initial"){
+                //this.props.user(fieldLoginEnter.value, fieldPasswordEnter.value);
+
+                const user = axios.get('http://localhost:3210/checkUser', {
+                params: {
+                    user_login: fieldLoginEnter.value,
+                    user_password: fieldPasswordEnter.value
+                }
+                })
+                .then( (response) => {
+                    return response.data
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+
+                console.log(user);
+                if(user.length === 0){
                     event.preventDefault();
-                    console.log(this.props.checkedUser);
-                    console.log('ok))0)');   
+                    alert('Wrong login or password')
                 }
                 else {
-                    event.preventDefault();
-                    alert("Wrong Login or Password");
+                    console.log('success')
                 }
-
+                // if(response.data === undefined){
+                //     event.preventDefault();
+                //     alert("Wrong login or password")
+                // }
+                // else {
+                //     console.log('ok))0)');   
+                //     console.log(this.props.checkedUser);
+                //     event.preventDefault();
+                // }
             }
             else {
                 fieldPasswordEnter.style.borderColor = "#dc0000";

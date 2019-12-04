@@ -156,7 +156,7 @@ app.get("/pickedPlaylist", function(req, res){
 	
 	pool.query(
 		`SELECT
-		p.playlist_name,
+		p.playlist_id,
 		t.track_id, t.track_name, t.track_link, t.track_time,
 		a.album_name, a.album_img, a.album_year,
 		s.singer_name,
@@ -211,10 +211,47 @@ app.post("/addPlaylist_main", function(req, res){
 		playlist_id: req.body.playlist_id
 	}
 
-	pool.query(`INSERT INTO playlists_main SET user_id = "${playlist.user_id}", playlist_id= "${playlist.playlist_id}"`, playlist, function(err, data) {
+	pool.query(
+		`INSERT INTO playlists_main
+		SET
+		user_id = "${playlist.user_id}",
+		playlist_id= "${playlist.playlist_id}"`,
+		playlist, function(err, data) {
 		if(err) {
 			return console.log(err);
 		}
+	});
+});
+
+app.put('/changePlaylistName', function(req, res){
+	const playlist = {
+		playlist_id: req.body.playlist_id,
+		playlist_name: req.body.playlist_name
+	}
+	pool.query(
+		`UPDATE playlists
+		SET playlist_name = '${playlist.playlist_name}'
+		WHERE playlist_id = ${playlist.playlist_id}`,
+		playlist,
+		function(err, data) {
+		if(err) {
+			return console.log(err);
+		}
+	});
+});
+
+app.get('/fetchPlaylistName', function(req, res){
+	playlist_id = req.query.playlist_id;
+
+	pool.query(
+		`SELECT * FROM playlists
+		WHERE playlist_id = ${playlist_id}`,
+		playlist_id,
+		function(err, data) {
+		if(err) {
+			return console.log(err);
+		}
+		res.json(data);
 	});
 });
 

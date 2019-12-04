@@ -17,12 +17,13 @@ class NavPlaylists extends Component {
     }
 
     render() {
+        let i = 0;
         return (
             this.props.playlists.map((value) => {
                 return (
                     <li
                     className="header__submenu_item"
-                    key={value.playlist_id}
+                    key={i++}
                     onClick={() => this.onClickItem(this.props.user.user_id, value.playlist_id)}>
                         {value.playlist_name}
                     </li>

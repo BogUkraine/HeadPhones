@@ -20,11 +20,9 @@ class PlaylistList extends Component {
     }
 
     changeTrack(track, index) {
-        console.log('this.props.checkQueue1', this.props.checkQueue);
         this.deepEqual(this.props.pickedPlaylist, this.props.queue);
 
         setTimeout(()=> {
-            console.log('this.props.checkQueue2', this.props.checkQueue);
             if(this.props.checkQueue){
                 this.props.queue(this.props.pickedPlaylist);
                 this.props.changeCheckerTracks(false);
@@ -39,6 +37,7 @@ class PlaylistList extends Component {
     }
     
     render() {
+        let i = 0;
         return(
             this.props.pickedPlaylist.map(( value, index ) => {
                 return (
@@ -52,7 +51,7 @@ class PlaylistList extends Component {
                         track_time={value.track_time}
                         change_track={this.changeTrack.bind(this)}
                         index={index}
-                        key={value.track_id}
+                        key={i++}
                     />
                 );
             })

@@ -1,6 +1,6 @@
 const tracksTime = (data) => {
     let time = 0;
-    if(data != undefined){
+    if(data !== undefined){
         for( let i = 0; i < data.length; i++ ) {
             time += data[i].track_time;
         }

@@ -24,12 +24,8 @@ const getUser = (login, password) => {
 export default function user (state = initialState, action) {
   	switch(action.type){
 		case('CHECK_USER'): {
-            const user = getUser(action.payload.user_login, action.payload.user_password);
-            setTimeout(()=> {
-                console.log(user, "user")
-            }, 2000)
-            
-            if(user.length == 0)
+            const user = getUser(action.payload.user_login, action.payload.user_password);            
+            if(user.length === 0)
                 return state;
             else
                 return user;
