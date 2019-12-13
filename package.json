@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "cors": "^2.8.5"
+    "cors": "^2.8.5",
+    "react-router": "^5.1.2"
   },
   "devDependencies": {
     "redux-devtools-extension": "^2.13.8"

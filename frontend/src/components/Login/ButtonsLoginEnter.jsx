@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink} from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom'
 
 import checkUser from '../../actions/checkUser';
 
@@ -21,6 +22,7 @@ class ButtonsLoginEnter extends Component {
     }
 
     handleClick(event) {
+        event.preventDefault();
         const fieldLoginEnter = document.getElementById("fieldLoginEnter");
         const fieldPasswordEnter = document.getElementById("fieldPasswordEnter");
         const loginWarning = document.getElementById("loginWarnEnter");
@@ -33,39 +35,45 @@ class ButtonsLoginEnter extends Component {
             if(fieldPasswordEnter.checkValidity() && fieldPasswordEnter.value !== '') {
                 fieldPasswordEnter.style.borderColor = "#ddd";
                 passwordWarning.style.display = "none";
-                
-                //this.props.user(fieldLoginEnter.value, fieldPasswordEnter.value);
 
-                const user = axios.get('http://localhost:3210/checkUser', {
-                params: {
-                    user_login: fieldLoginEnter.value,
-                    user_password: fieldPasswordEnter.value
-                }
-                })
-                .then( (response) => {
-                    return response.data
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
+               
+                axios.get('http://localhost:3210/checkUser', {
+                    params: {
+                        user_login: fieldLoginEnter.value,
+                        user_password: fieldPasswordEnter.value
+                    }
+                    })
+                    .then( (response) => {
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    })
 
-                console.log(user);
-                if(user.length === 0){
-                    event.preventDefault();
-                    alert('Wrong login or password')
-                }
-                else {
-                    console.log('success')
-                }
-                // if(response.data === undefined){
+                console.log('3');
+
+                return <Redirect to = '/home' />
+
+                // let promise = new Promise((resolve, reject) => {
+                    
+                //     resolve(
+                //     axios.get('http://localhost:3210/checkUser', {
+                //     params: {
+                //         user_login: fieldLoginEnter.value,
+                //         user_password: fieldPasswordEnter.value
+                //     }
+                //     })
+                //     .then( (response) => {
+                //         return response.data
+                //     })
+                //     .catch(function (error) {
+                //         console.log(error);
+                //     }))
+                // }); 
+
+                // promise.then(() => {
+                //     console.log('2')
                 //     event.preventDefault();
-                //     alert("Wrong login or password")
-                // }
-                // else {
-                //     console.log('ok))0)');   
-                //     console.log(this.props.checkedUser);
-                //     event.preventDefault();
-                // }
+                // });
             }
             else {
                 fieldPasswordEnter.style.borderColor = "#dc0000";

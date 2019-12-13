@@ -3,7 +3,7 @@ const initialState = [{}];
 export default function pickedPlaylist (state = initialState, action) {
     switch(action.type){
 		case('FETCH_PICKED_PLAYLIST'): {
-			return [action.payload];
+			return state;
         }
         case('FETCHED_PICKED_PLAYLIST_SUCCESS'): {
             return action.payload;

@@ -10,10 +10,8 @@ class NavPlaylists extends Component {
         this.onClickItem = this.onClickItem.bind(this);
     }
 
-    onClickItem(user_id, playlist_id) {
-        console.log(user_id);
-        console.log(playlist_id);
-        this.props.pickedPlaylist(user_id, playlist_id);
+    onClickItem(playlist_id) {
+        this.props.pickedPlaylist(playlist_id);
     }
 
     render() {
@@ -24,7 +22,7 @@ class NavPlaylists extends Component {
                     <li
                     className="header__submenu_item"
                     key={i++}
-                    onClick={() => this.onClickItem(this.props.user.user_id, value.playlist_id)}>
+                    onClick={() => this.onClickItem(value.playlist_id)}>
                         {value.playlist_name}
                     </li>
                 );

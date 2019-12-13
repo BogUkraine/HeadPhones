@@ -8,7 +8,6 @@ const apiGetPlaylists = (url, user_id) => {
         }
     })
     .then( (response) => {
-        console.log("blyat", response.data)
         return response.data;
     })
     .catch(function (error) {

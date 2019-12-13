@@ -4,9 +4,15 @@ $white: #fff;
 $fa-color: #ddd;
 $warning-color: #dc0000;
 
+//scroll-bar
+$scrollbar-track-color: #ddd;
+$scrollbar-thumb-color: #222629;
+$scrollbar-thumb-hover-color: #8b8bc7;
+
 //text
 $text-color: #ddd;
 $input-text-color: #ddd;
+$common-track-add-color: #8b8bc7;
 $font: 'Century Gothic', 'Comic Sans MS';
 
 //borders
@@ -18,6 +24,7 @@ $border-editer-color: #8b8bc7;
 
 //backgrounds
 $background-color: #222629;
+$add-to-playlist-color: #0e0e16;
 $header-color: #0e0e16;
 $footer-color: #0e0e16;
 $track-color: #323538;
@@ -65,4 +72,5 @@ $text-size-big: 22px;
 $text-size-normal: 18px;
 $text-size-small: 16px;
 $text-size-smallest: 14px;
+$text-size-tiny: 12px;
 $text-size-warning: 12px;

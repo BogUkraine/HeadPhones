@@ -10,23 +10,42 @@ class FooterControlsRight extends Component {
             isShownQueue: false
         }
         this.queueClick = this.queueClick.bind(this);
+        this.repeatClick = this.repeatClick.bind(this);
+        this.shuffleClick = this.shuffleClick.bind(this);
     }
 
     queueClick() {
         const queue = document.getElementById('queue');
-        
         if(!this.state.isShownQueue){
             queue.style.display = "flex";
             queue.style.top = "52px";
             this.setState({isShownQueue: true});
-            console.log(this.state.isShownQueue);
         }
         else {
             queue.style.display = "flex";
             queue.style.top = "calc(100vh - 70px)";
             this.setState({isShownQueue: false});
         }
-        
+    }
+
+    repeatClick(event) {
+        if(this.props.footer.repeating) {
+            event.target.style.color = '#ddd';
+        }
+        else {
+            event.target.style.color = '#8b8bc7';
+        }
+        this.props.changeRepeating(!this.props.footer.repeating);
+    }
+
+    shuffleClick(event) {
+        if(this.props.footer.shuffle) {
+            event.target.style.color = '#ddd';
+        }
+        else {
+            event.target.style.color = '#8b8bc7';
+        }
+        this.props.changeShuffle(!this.props.footer.shuffle);
     }
     
     render() {
@@ -43,15 +62,9 @@ class FooterControlsRight extends Component {
                         <span className="fa fa-volume-up" aria-hidden="true"></span>
                     </button>
                 </div>
-                <button onClick="" className="control_button footer__repeat">
-                    <span className="fa fa-refresh" aria-hidden="true"></span>
-                </button>
-                <button onClick="" className="control_button footer__shuffle">
-                    <span className="fa fa-random" aria-hidden="true"></span>
-                </button>
-                <button onClick={this.queueClick} className="control_button footer__queue">
-                    <span className="fa fa-caret-up" aria-hidden="true"></span>
-                </button>
+                <span onClick={(event) => this.repeatClick(event)} className="fa fa-refresh" aria-hidden="true" id="repeating"></span>
+                <span onClick={(event) => this.shuffleClick(event)} className="fa fa-random" aria-hidden="true" id="shuffle"></span>
+                <span onClick={(event) => this.queueClick(event)} className="fa fa-caret-up" aria-hidden="true"></span>
             </div>
         )
     }
@@ -59,7 +72,16 @@ class FooterControlsRight extends Component {
 
 export default connect(state => ({
     currentTrack: state.currentTrack,
-
+    footer: state.footer
 }),
-{}
+{
+    changeRepeating: (isRepeat) => ({
+        type: 'CHANGE_REPEATING',
+        payload: isRepeat
+    }),
+    changeShuffle: (isShuffle) => ({
+        type: 'CHANGE_SHUFFLE',
+        payload: isShuffle
+    }),
+}
 )(FooterControlsRight);

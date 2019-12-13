@@ -10,6 +10,7 @@ import fetchTopTracks from './fetchTopTracks';
 import addPlaylist from './addPlaylist';
 import fetchPlaylistsCount from './fetchPlaylistsCount';
 import changePlaylistName from './changePlaylistName';
+import addTrackToPlaylist from './addTrackToPlaylist';
 /*
 import {changeFooterSongPercent,
     changeFooterSongTime,
@@ -38,6 +39,7 @@ function* playlistsWatcher() {
     yield takeLatest('FETCH_PLAYLISTS', fetchPlaylists);
     yield takeLatest('ADD_PLAYLIST', addPlaylist);
     yield takeLatest('CHANGE_PLAYLIST_NAME', changePlaylistName);
+    yield takeLatest('ADD_TRACK_TO_PLAYLIST', addTrackToPlaylist);
 }
 
 function* fetchPickedPlaylistWatcher() {

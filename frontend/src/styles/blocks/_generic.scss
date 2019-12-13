@@ -44,3 +44,21 @@ a:active {
     border: 2px solid $border-login-color;
     background-color: $input-inner-color;
 }
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: $scrollbar-track-color;
+}
+
+  /* Handle */
+::-webkit-scrollbar-thumb {
+    background: $scrollbar-thumb-color;
+}
+
+  /* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: $scrollbar-thumb-hover-color;
+}

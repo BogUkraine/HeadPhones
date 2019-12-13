@@ -34,22 +34,18 @@ class Footer extends Component {
         this.onTimeUpdateListener = this.onTimeUpdateListener.bind(this);
         this.updateAudioTime = this.updateAudioTime.bind(this);
         this.updateVolumeLevel = this.updateVolumeLevel.bind(this);
-    }
+	}
 
-    componentWillReceiveProps(nextProps) {
-		this.setState({ playlist: nextProps.playlist})
-    }
-    
     render() {
         return (
             <footer className="footer" id="footer">
                 <audio
                 className="footer__audio"
-                src={this.props.queue[this.props.currentTrack.index].track_link}
+                src={this.props.currentTrack.track_link}
                 ref={this.reactAudioPlayer}
-				onTimeUpdate={this.onTimeUpdateListener}
-				onEnded={this.goNextSong}
-				autoPlay={true}
+                onTimeUpdate={this.onTimeUpdateListener}
+                onEnded={this.goNextSong}
+                autoPlay={true}
                 />
 
                 <FooterSeekbar
@@ -78,9 +74,9 @@ class Footer extends Component {
                     <FooterMore />
 
                     <FooterControlsRight
-					audioControls={this.state.audioControls}
-					volumeLevel={this.state.volumeLevel}
-              		updateVolumeLevel={this.updateVolumeLevel}
+                    audioControls={this.state.audioControls}
+                    volumeLevel={this.state.volumeLevel}
+                    updateVolumeLevel={this.updateVolumeLevel}
 					/>
                 </div>
             </footer>
@@ -88,11 +84,11 @@ class Footer extends Component {
     }
 
     updateIsPlaying(isPlaying) {
-		isPlaying ? this.pauseSong() : this.playSong();
+		  isPlaying ? this.pauseSong() : this.playSong();
     }
 
     playSong() {
-        if (this.props.queue !== undefined && this.props.queue.durationlength !== 0) {
+      if (this.props.queue !== undefined && this.props.queue.durationlength !== 0) {
 			setTimeout(function () {
 				
 				if (this.reactAudioPlayer.current.play() !== undefined) {
@@ -115,11 +111,15 @@ class Footer extends Component {
     }
 
     goPreviousSong() {
-		if(this.props.currentTrack.index === 0){
-			this.props.changeCurrentTrack(this.props.queue[this.props.queue.length - 1], this.props.queue.length - 1);
-		}
-		else {
-			this.props.changeCurrentTrack(this.props.queue[this.props.currentTrack.index - 1], this.props.currentTrack.index - 1);
+		if(!this.props.footer.repeating) {
+			if(this.props.currentTrack.index === 0){
+				this.props.changeCurrentTrack(this.props.queue[this.props.queue.length - 1],
+					this.props.queue.length - 1);
+			}
+			else {
+				this.props.changeCurrentTrack(this.props.queue[this.props.currentTrack.index - 1],
+					this.props.currentTrack.index - 1);
+			}
 		}
         this.reactAudioPlayer.current.currentTime = 0;
         this.pauseSong();
@@ -127,15 +127,32 @@ class Footer extends Component {
     }
     
     goNextSong() {
-		if(this.props.currentTrack.index === this.props.queue.length - 1){
-			this.props.changeCurrentTrack(this.props.queue[0], 0);
-		}
-		else {
-			this.props.changeCurrentTrack(this.props.queue[this.props.currentTrack.index + 1], this.props.currentTrack.index + 1);
+		if(!this.props.footer.repeating) {
+			if(!this.props.footer.shuffle) {
+				if(this.props.currentTrack.index === this.props.queue.length - 1){
+					this.props.changeCurrentTrack(this.props.queue[0], 0);
+				}
+				else {
+					this.props.changeCurrentTrack(this.props.queue[this.props.currentTrack.index + 1],
+						this.props.currentTrack.index + 1);
+				}
+			}
+			else {
+				let random = Math.floor(Math.random()*this.props.queue.length);
+				while(true) {
+					if(random === this.props.currentTrack.index){
+						random = Math.floor(Math.random()*this.props.queue.length);
+					}
+					else {
+						break;
+					}
+				}
+				this.props.changeCurrentTrack(this.props.queue[random], random);
+			}
 		}
 		this.reactAudioPlayer.current.currentTime = 0;
-        this.pauseSong();
-        this.playSong();
+		this.pauseSong();
+		this.playSong();
     }
 
     onTimeUpdateListener() {
@@ -154,14 +171,14 @@ class Footer extends Component {
       }
 
     updateAudioTime(event) {
-        event.persist();
-        if (this.state.playlist !== undefined && this.state.playlist.length !== 0) {
-		  let songPercentage = event.nativeEvent.layerX / window.innerWidth;
-          let currentTime = songPercentage * this.reactAudioPlayer.current.duration;
-          this.reactAudioPlayer.current.currentTime = currentTime;
-          let audioControls = Object.assign({}, this.state.audioControls);
-          audioControls.songPercent = songPercentage;
-          this.setState({ audioControls });
+        //event.persist();
+        if (this.state.playlist !== undefined || this.state.playlist.length !== 0) {
+		    let songPercentage = event.nativeEvent.layerX / window.innerWidth;
+			let currentTime = songPercentage * this.reactAudioPlayer.current.duration;
+			this.reactAudioPlayer.current.currentTime = currentTime;
+			let audioControls = Object.assign({}, this.state.audioControls);
+			audioControls.songPercent = songPercentage;
+			this.setState({ audioControls });
         }
 	}
 	  
@@ -177,6 +194,7 @@ export default connect(
         currentTrack: state.currentTrack,
         playlist: state.queue,
         queue: state.queue,
+        footer: state.footer,
 	}),
 	({
 		changeCurrentTrack: (track, index) => ({

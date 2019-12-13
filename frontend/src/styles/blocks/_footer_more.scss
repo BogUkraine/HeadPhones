@@ -9,11 +9,12 @@
         display: none;
         flex-wrap: wrap;
         list-style-type: none;
-        position: absolute;
-        bottom: $footer-more-bottom;       
+        position: fixed;
+        bottom: $footer-more-bottom;
+        right: $footer-more-right;
+        
         background: $submenu-color;
         width: $submenu-width;
-        right: $footer-more-right;
         font-size: $text-size-smallest;
         padding: 0;
         font-weight: 300;
