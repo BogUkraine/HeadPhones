@@ -19,7 +19,7 @@ import {changeFooterSongPercent,
 */
 
 function* checkUserWatcher() {
-    yield takeLatest('CHECK_USER', fetchUser);
+    //yield takeLatest('CHECK_USER', fetchUser);
     yield takeLatest('ADD_USER', addUser);
 }
 

@@ -1,13 +1,9 @@
-const initialState = [{
-	playlist_id: 1,
-	playlist_name: "kek1"
-},
-];
+const initialState = [];
 
 export default function playlists (state = initialState, action) {
   	switch(action.type){
 		case('FETCH_PLAYLISTS'): {
-			return action.payload
+			return state
 		}
 		case('FETCHED_PLAYLISTS_SUCCESS'): {
 			return action.data

@@ -9,6 +9,7 @@ const apiGetUser = (url, login, password) => {
         }
     })
     .then( (response) => {
+        console.log('danijejsnsnjsvjisv')
         return response.data[0];
     })
     .catch(function (error) {
@@ -22,6 +23,6 @@ export default function* fetchUser({payload: {user_login, user_password}}) {
         yield put({ type: "CHECKED_USER_SUCCESS", data: user});
     }
     else {
-        yield put({ type: "CHECKED_USER_FAIL", data: {user_id: "initial"}});
+        yield put({ type: "CHECKED_USER_FAIL"});
     }
 }

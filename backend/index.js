@@ -53,6 +53,7 @@ app.get("/checkUser", function(req, res){
 		login: req.query.user_login,
 		password: req.query.user_password
 	}
+	
 	pool.query(
 		`SELECT *
 		FROM users
@@ -60,7 +61,7 @@ app.get("/checkUser", function(req, res){
 		users.user_password = '${user.password}')`, user,
 		function(err, data) {
 		if(err) {
-			return console.log(err);
+			return console.log('it is err', err);
 		}
 		res.json(data);
 	});

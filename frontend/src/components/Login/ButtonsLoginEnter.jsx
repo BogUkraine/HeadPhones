@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { NavLink} from 'react-router-dom';
+//import { NavLink} from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom'
@@ -9,6 +9,10 @@ import checkUser from '../../actions/checkUser';
 class ButtonsLoginEnter extends Component {
     constructor(props){
         super(props);
+        this.state = {
+            toHome: false,
+        }
+
         this.handleClick = this.handleClick.bind(this);
         this.backClick = this.backClick.bind(this);
     }
@@ -35,7 +39,6 @@ class ButtonsLoginEnter extends Component {
             if(fieldPasswordEnter.checkValidity() && fieldPasswordEnter.value !== '') {
                 fieldPasswordEnter.style.borderColor = "#ddd";
                 passwordWarning.style.display = "none";
-
                
                 axios.get('http://localhost:3210/checkUser', {
                     params: {
@@ -44,36 +47,19 @@ class ButtonsLoginEnter extends Component {
                     }
                     })
                     .then( (response) => {
+                        if(response.data[0] !== undefined) {
+                            this.props.changeUser(response.data[0])
+                            this.setState({toHome: true})
+                        }
+                        else {
+                            alert('Wrong password or login')
+                            this.setState({toHome: false})
+                        }
                     })
                     .catch(function (error) {
                         console.log(error);
                     })
 
-                console.log('3');
-
-                return <Redirect to = '/home' />
-
-                // let promise = new Promise((resolve, reject) => {
-                    
-                //     resolve(
-                //     axios.get('http://localhost:3210/checkUser', {
-                //     params: {
-                //         user_login: fieldLoginEnter.value,
-                //         user_password: fieldPasswordEnter.value
-                //     }
-                //     })
-                //     .then( (response) => {
-                //         return response.data
-                //     })
-                //     .catch(function (error) {
-                //         console.log(error);
-                //     }))
-                // }); 
-
-                // promise.then(() => {
-                //     console.log('2')
-                //     event.preventDefault();
-                // });
             }
             else {
                 fieldPasswordEnter.style.borderColor = "#dc0000";
@@ -92,21 +78,21 @@ class ButtonsLoginEnter extends Component {
     render() {
         return (
             <div className="form__buttons">
+                {(this.state.toHome) ? <Redirect to='/main/home' /> : null}
                 <button
                 className="form__buttons_create button"
                 value="Create account"
                 id="toCreate"
-                onClick={this.backClick}>Create account</button>
-                <NavLink to="/home">
-                    <button
-                    className="form__buttons_enter button"
-                    value="Enter"
-                    id="login"
-                    onClick={this.handleClick}
-                    >
+                onClick={this.backClick}>
+                    Create account
+                </button>
+                <button
+                className="form__buttons_enter button"
+                value="Enter"
+                id="login"
+                onClick={this.handleClick}>
                     Enter
-                    </button>
-                </NavLink>
+                </button>
             </div>
         );
     }
@@ -115,9 +101,17 @@ class ButtonsLoginEnter extends Component {
 
 export default connect(
 	state => ({
-        checkedUser: state.user
+        checkedUser: state.user,
 	}),
     {
         user: checkUser,
+        changeUser: (data) => ({
+            type: "CHANGE_USER",
+            payload: {
+                user_id: data.user_id,
+                user_login: data.user_login,
+                user_password: data.user_password,
+            }
+        })
     }
 )(ButtonsLoginEnter);

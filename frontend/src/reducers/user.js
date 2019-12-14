@@ -1,9 +1,9 @@
 import axios from 'axios';
 
 const initialState = {
-    user_id: '1',
-    user_password: 'initial',
+    user_id: 1,
     user_login: 'BogUkraine',
+    user_password: '123',
 };
 
 const getUser = (login, password) => {
@@ -14,6 +14,7 @@ const getUser = (login, password) => {
     }
     })
     .then( (response) => {
+        console.log('user.js response.data', response.data[0]);
         return response.data[0];
     })
     .catch(function (error) {
@@ -24,11 +25,9 @@ const getUser = (login, password) => {
 export default function user (state = initialState, action) {
   	switch(action.type){
 		case('CHECK_USER'): {
-            const user = getUser(action.payload.user_login, action.payload.user_password);            
-            if(user.length === 0)
-                return state;
-            else
-                return user;
+            const user = getUser(action.payload.user_login, action.payload.user_password); 
+            console.log('user.js Check_user', user);
+            return user;
         }
         case('CHECKED_USER_SUCCESS'): {
             return action.data
@@ -37,6 +36,9 @@ export default function user (state = initialState, action) {
             return action.data
         }
         case('ADD_USER'): {
+            return action.payload
+        }
+        case('CHANGE_USER'): {
             return action.payload
         }
 		default: {

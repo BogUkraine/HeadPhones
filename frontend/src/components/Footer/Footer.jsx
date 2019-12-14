@@ -13,18 +13,18 @@ class Footer extends Component {
     constructor(props) {
         super(props)
         this.state = {
-			playlist: [],
-            playlistIsPlaying: true,
-            showVisualizer: false,
-            audioAnalyser: null,
-            audioControls: {
-                songPercent: 0,
-                songTime: '',
-                songDuration: ''
-            },
-			volumeLevel: 80,
-		}
-		
+        playlist: [],
+              playlistIsPlaying: true,
+              showVisualizer: false,
+              audioAnalyser: null,
+              audioControls: {
+                  songPercent: 0,
+                  songTime: '',
+                  songDuration: ''
+              },
+        volumeLevel: 80,
+      }
+      
         this.reactAudioPlayer = React.createRef();
         this.updateIsPlaying = this.updateIsPlaying.bind(this);
         this.goNextSong = this.goNextSong.bind(this);

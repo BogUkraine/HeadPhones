@@ -26,14 +26,14 @@ class Nav extends Component {
         return (
             <div className="header__navigation">
                 <ul className="header__topmenu">
-                    <NavLink to="/home">
+                    <NavLink to="/main/home">
                         <li className="header__topmenu_item">
                         <span className="header__topmenu_text">
                             Home
                         </span>
                         </li>
                     </NavLink>
-                    <NavLink to="/library">
+                    <NavLink to="/main/library">
                         <li className="header__topmenu_item">
                         <span className="header__topmenu_text">
                             Library
@@ -42,7 +42,7 @@ class Nav extends Component {
                     </NavLink>
                     <li className="header__topmenu_item">
                         <span className="header__topmenu_text">Playlists</span>
-                        <NavLink to="/playlist" className="header__submenu_link">
+                        <NavLink to="/main/playlist" className="header__submenu_link">
                             <ul className="header__submenu">
                                 <NavPlaylists />
                                 {(this.props.playlists.length < 3)
