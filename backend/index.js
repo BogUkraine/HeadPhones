@@ -139,8 +139,9 @@ app.get("/topTracks", function(req, res){
 		JOIN albums a USING(album_id)
 		JOIN singers s USING(singer_id)
 		JOIN genres g USING(genre_id)
-		ORDER BY RAND()
-		LIMIT 7`,
+		ORDER BY DATE(NOW()) ASC
+		LIMIT 7
+		`,
 		function(err, data) {
 		if(err) {
 			return console.log(err);

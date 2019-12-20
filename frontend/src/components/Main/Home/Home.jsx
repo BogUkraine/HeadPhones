@@ -14,7 +14,6 @@ class Home extends Component {
         this.props.fetchPlaylists(this.props.user.user_id);
         this.props.fetchQuote();
         this.props.fetchTopTracks();
-        //this.props.playlistsCount();
     }
 
     componentDidUpdate() {

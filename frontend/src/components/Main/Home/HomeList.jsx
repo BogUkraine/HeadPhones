@@ -29,6 +29,7 @@ class HomeList extends Component {
         const main = document.getElementById("main");
         footer.style.display = "flex";
         main.style.height = "calc(100vh - 122px)";
+        this.props.changeIsPlaying(true);
         this.props.changeCurrentTrack(track, index);        
     }
 
@@ -134,6 +135,10 @@ export default connect(
             type: "ADD_TRACK_TO_PLAYLIST",
             p_id,
             t_id,
+        }),
+        changeIsPlaying: (data) => ({
+            type: "CHANGE_IS_PLAYING",
+            payload: data,
         })
     }
 )(HomeList);
