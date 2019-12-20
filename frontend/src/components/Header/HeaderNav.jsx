@@ -14,8 +14,8 @@ class Nav extends Component {
     }
 
     onClickCreate() {
-        this.props.addPlaylist(this.props.user.user_id, this.props.playlistsCount.count);
-        this.props.pickedPlaylist(this.props.user.user_id, this.props.playlistsCount.count);
+        this.props.addPlaylist(this.props.user.user_id);
+        this.props.pickedPlaylist(this.props.user.user_id);
         setTimeout(()=>{
             this.props.fetchPlaylistsCount();
             this.props.fetchPlaylists(this.props.user.user_id);

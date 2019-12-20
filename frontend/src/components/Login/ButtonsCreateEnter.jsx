@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
-import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
+
+import axios from 'axios';
+import { Redirect } from 'react-router-dom'
 
 import checkUser from '../../actions/checkUser';
 import addUser from '../../actions/addUser';
@@ -8,6 +10,10 @@ import addUser from '../../actions/addUser';
 class ButtonsCreateEnter extends Component {
     constructor(props){
         super(props);
+        this.state = {
+            toHome: false,
+        }
+
         this.handleClick = this.handleClick.bind(this);
         this.backClick = this.backClick.bind(this);
     }
@@ -35,17 +41,57 @@ class ButtonsCreateEnter extends Component {
                 fieldPasswordCreate.style.borderColor = "#ddd";
                 passwordWarning.style.display = "none";
 
-                this.props.user(fieldLoginCreate.value, fieldPasswordCreate.value);   
-                
-                if(this.props.checkedUser.user_id === "error"){
-                    event.preventDefault();
-                    alert("Wrong Login or Password");
-                }
-                else {
-                    this.props.addUser(fieldLoginCreate.value, fieldPasswordCreate.value);  
-                    console.log(this.props.checkedUser);
-                    console.log('ok))0)');
-                }
+                axios.get('http://localhost:3210/checkLogin', {
+                    params: {
+                        user_login: fieldLoginCreate.value
+                    }
+                    })
+                    .then( (response) => {
+                        if(response.data[0] !== undefined) {
+                            alert('This login is busy, choose another one')
+                            this.setState({toHome: false})
+                        }
+                        else {
+                            axios.post('http://localhost:3210/addUser', {
+                                user_login: fieldLoginCreate.value,
+                                user_password: fieldPasswordCreate.value
+                            })
+                            .then( (response) => {
+                                
+                            })
+                            .catch(function (error) {
+                                console.log(error);
+                            });
+                            
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    })
+
+                setTimeout(() => {
+                    axios.get('http://localhost:3210/checkUser', {
+                    params: {
+                        user_login: fieldLoginCreate.value,
+                        user_password: fieldPasswordCreate.value
+                    }
+                    })
+                    .then( (response) => {
+                        console.log('get', response.data)
+                        if(response.data[0] !== undefined) {
+                            this.props.changeUser(response.data[0])
+                            this.setState({toHome: true})
+                        }
+                        else {
+                            alert('Wrong password or login')
+                            this.setState({toHome: false})
+                        }
+                        console.log(this.state.toHome)
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    })
+                }, 500)
 
             }
             else {
@@ -64,21 +110,22 @@ class ButtonsCreateEnter extends Component {
     render() {
         return (
             <div className="form__buttons">
+                {(this.state.toHome) ? <Redirect to='/main/home' /> : null}
                 <button
                 className="form__buttons_create button"
                 value="Create account"
                 id="toLogin"
-                onClick={this.backClick}>Back to Login</button>
-                <NavLink to="/home">
-                    <button
-                    className="form__buttons_enter button"
-                    value="Enter"
-                    id="create"
-                    onClick={this.handleClick}
-                    >
+                onClick={this.backClick}>
+                    Back to Login
+                </button>
+
+                <button
+                className="form__buttons_enter button"
+                value="Enter"
+                id="create"
+                onClick={this.handleClick}>
                     Create
-                    </button>
-                </NavLink>
+                </button>
             </div>
         );
     }
@@ -92,5 +139,13 @@ export default connect(
     {
         user: checkUser,
         addUser: addUser,
+        changeUser: (data) => ({
+            type: "CHANGE_USER",
+            payload: {
+                user_id: data.user_id,
+                user_login: data.user_login,
+                user_password: data.user_password,
+            }
+        })
 	}
 )(ButtonsCreateEnter);

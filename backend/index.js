@@ -64,6 +64,25 @@ app.get("/checkUser", function(req, res){
 			return console.log('it is err', err);
 		}
 		res.json(data);
+		console.log(data);
+	});
+});
+
+app.get("/checkLogin", function(req, res){
+	const user = {
+		login: req.query.user_login,
+	}
+	
+	pool.query(
+		`SELECT *
+		FROM users
+		WHERE users.user_login = '${user.login}'`, user,
+		function(err, data) {
+		if(err) {
+			return console.log('it is err', err);
+		}
+		res.json(data);
+		console.log(data);
 	});
 });
 
@@ -196,11 +215,11 @@ app.post("/addUser", function(req, res){
 
 app.post("/addPlaylist", function(req, res){
 	const playlist = {
-		playlist_name: req.body.playlist_name,
 		user_id: req.body.user_id,
 	}
 
-	pool.query(`INSERT INTO playlists SET playlist_name = "${playlist.playlist_name}" AND user_id = ${playlist.user_id}`, playlist, function(err, data) {
+	pool.query(`INSERT INTO playlists (playlist_name, user_id)
+	VALUES ('playlist name', ${playlist.user_id});`, playlist, function(err, data) {
 		if(err) {
 			return console.log(err);
 		}
@@ -253,7 +272,7 @@ app.post('/addTrack', function(req, res){
 		info,
 		function(err, data) {
 		if(err) {
-			return console.log(err);
+			return console.log('error', err);
 		}
 		res.json(data);
 	});
@@ -263,7 +282,6 @@ app.post('/addTrack', function(req, res){
 
 app.get("/current/tracks", function(req, res){
 	const user = req.query.userInfo;
-	console.log("bd user:", req.query.userInfo);
 
 	pool.query(
 		`SELECT
