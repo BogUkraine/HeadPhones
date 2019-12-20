@@ -1,0 +1,29 @@
+.playlist {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 70px;
+    height: 100%;
+    overflow-y: auto;
+
+    &__header {
+        width: 100%;
+        display: flex;
+        flex-wrap: nowrap;
+
+        &_img {
+            width: 250px;
+            height: 250px;
+            margin: 10px;
+        }
+
+        &_description {
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+        }
+
+        &_buttons {
+            margin: 50px 0;
+        }
+    }
+}

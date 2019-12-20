@@ -1,0 +1,9 @@
+npm init
+npm install express --save-dev
+npm install mysql2 --save-dev
+add .gitignore
+npm install --save-dev nodemon
+npm install cors --save-dev
+
+When start programm:
+nodemon index.js

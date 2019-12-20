@@ -1,0 +1,14 @@
+.home {
+    display: flex;
+    flex-wrap: nowrap;
+    height: 100%;
+
+    &__left {
+        flex: 1;
+        margin-left: 10px;
+    }
+
+    &__right {
+        flex: 1;
+    }
+}

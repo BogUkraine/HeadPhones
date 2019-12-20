@@ -1,0 +1,102 @@
+.common__track {
+    cursor: pointer;
+    display: flex;
+    flex-wrap: nowrap;
+    width: 100%;
+    height: $track-height;
+    border-bottom: 1px solid $border-color;
+    color: $text-color;
+    background: $track-color;
+    font-size: $text-size-smallest;
+
+    &_wrapper {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        padding: 6px 0;
+        margin-left: 10px;
+        margin-right: 10px;
+        width: 100%;
+    }
+
+    &_img {
+        width: 50px;
+        height: 50px;
+        margin: 5px;
+    }
+
+    &_name {
+        font-size: $text-size-small;
+        font-weight: 600;
+    }
+
+    &_description {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    &_singer {
+        padding-right: 20px;
+        justify-content: flex-start;
+        flex: 3;
+    }
+
+    &_album {
+        text-align: center;
+        padding: 0 20px;
+        flex: 4;
+        justify-content: center;
+        align-items: center;
+        border-right: 2px solid $black;
+        border-left: 2px solid $black;
+    }
+
+    &_year {
+        flex: 2;
+        justify-content: center;
+        padding-left: 20px;
+    }
+
+    &_time {
+        display: inline-block;
+        text-align: end;
+        width: 35px;
+    }
+
+    &:hover {
+        background-color: $track-hover-color;
+    }
+
+    &_add {
+        display: flex;
+        color: $common-track-add-color;
+        font-weight: 700;
+
+        &_to_queue {
+
+            &:hover {
+                color: $black;
+            }
+        }
+
+        &_to_album {
+            margin-left: 20px;
+
+            &:hover {
+                color: $black;
+            }
+        }
+    }
+}
+
+@media (max-width: 900px) {
+    .common__track {
+        font-size: $text-size-tiny;
+
+        &_name {
+            font-size: $text-size-smallest;
+        }
+    }
+}

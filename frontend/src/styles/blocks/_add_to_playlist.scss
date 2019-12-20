@@ -1,0 +1,30 @@
+.home__add_to_playlist {
+    position: fixed;
+    display: none;
+    flex-wrap: wrap;
+    width: 150px;
+    background-color: $add-to-playlist-color;
+    font-size: $text-size-smallest;
+    border: 2px solid $border-color;
+    list-style-type: none;
+    padding: 0;
+    z-index: 9999;
+    cursor: pointer;
+}
+
+.add__item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 5px;
+    height: 30px;
+
+    &:hover {
+        background-color: $track-hover-color;
+    }
+
+    &:not(:last-child) {
+        border-bottom: 2px solid $border-color;
+    }
+}

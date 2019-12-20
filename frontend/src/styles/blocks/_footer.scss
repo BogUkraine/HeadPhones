@@ -1,0 +1,93 @@
+.footer {
+    position: relative;
+    display: none;
+    flex-wrap: wrap;
+    width: 100%;
+    height: $footer-height;
+    background-color: $footer-color;
+
+    &__controls_left {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex: 3;
+        min-width: 200px;
+        margin-right: 100px;
+    }
+
+    &__controls_right {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        flex: 5;
+        min-width: 200px;
+        margin-left: 80px;
+    }
+
+    &__time {
+        font-size: $text-size-small;
+    }
+
+    &__audio {
+        display: none;
+    }
+
+    &__wrapper {
+        display: flex;
+        width: 100%;
+    }
+
+    &__volume {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        width: $footer-volume-width;
+
+
+        &_seekbar {
+            display: flex;
+            align-items: center;
+            width: 120px;
+            height: $footer-volume-seekbar-height;
+            outline: none;
+        }
+
+    }
+}
+
+.fa {
+    cursor: pointer;
+    margin: 0 10px;
+    color: $fa-color;
+}
+
+.fa-2x {
+    font-size: $text-size-huge;
+}
+
+.control_button {
+    border: none;
+    background-color: transparent;
+    outline: none;
+}
+
+@media (max-width: 1200px) {
+.footer {
+    &__track {
+        min-width: 300px;
+    }
+
+    &__controls_left {
+        margin-right: 70px;
+    }
+
+    &__controls_right {
+        min-width: 150px;
+        margin-left: 10px;
+    }
+
+        &_seekbar {
+            width: 100px;
+        }
+    }
+}

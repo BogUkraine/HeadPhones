@@ -1,0 +1,64 @@
+body {
+    font-family: 'Century Gothic', 'Comic Sans MS';
+    font-size: 24px;
+    color: $text-color;
+    background: $background-color;
+    overflow: hidden;
+}
+
+a:link {
+    color: $black;
+    text-decoration: none;
+}
+
+a:visited {
+    color: $black;
+}
+
+a:active {
+    color: $black;
+}
+
+.main {
+    height: $main-height;
+    transition: height 1.5s;
+}
+
+.button {
+    cursor: pointer;
+    width: 180px;
+    height: 40px;
+    border: 2px solid $border-login-color;
+    border-radius: 2%;
+    background-color: $button-color;
+    font-family:  'Century Gothic', 'Comic Sans MS';
+    font-size: 20px;
+}
+
+.field {
+    cursor: pointer;
+    font-family: 'Century Gothic', 'Comic Sans MS';
+    font-size: 18px;
+    color: $input-text-color;
+    width: 260px;
+    border: 2px solid $border-login-color;
+    background-color: $input-inner-color;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: $scrollbar-track-color;
+}
+
+  /* Handle */
+::-webkit-scrollbar-thumb {
+    background: $scrollbar-thumb-color;
+}
+
+  /* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: $scrollbar-thumb-hover-color;
+}

@@ -1,0 +1,15 @@
+npm install axios --save-dev
+//redux//
+npm i --save-dev clean-webpack-plugin
+    copy-webpack-plugin mini-css-extract-plugin
+    optimize-css-assets-webpack-plugin
+    uglifyjs-webpack-plugin html-webpack-plugin
+    imagemin-webpack-plugin
+npm install --save-dev redux-saga
+npm install --save-dev redux-devtools-extension
+npm install --save prop-types
+npm install react-slider
+npm install --save rc-slider
+
+when start programm:
+npm start

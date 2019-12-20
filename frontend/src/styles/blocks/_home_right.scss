@@ -1,0 +1,17 @@
+.home__right {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+    &_img {
+        width: 400px;
+        height: 400px;
+    }
+
+    &_quote {
+        display: flex;
+        justify-content: center;
+        margin: -20px 10px 10px 10px;
+    }
+}

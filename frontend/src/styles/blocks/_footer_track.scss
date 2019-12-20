@@ -1,0 +1,10 @@
+.footer__track {
+    display: flex;
+    flex: 5;
+    flex-wrap: nowrap;
+    align-items: center;
+    min-width: 400px;
+    height: $footer-height;
+    color: $text-color;
+    font-size: $text-size-smallest;
+}

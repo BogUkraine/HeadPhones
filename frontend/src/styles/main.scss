@@ -1,0 +1,39 @@
+// Common
+
+@import 'includes/_variables';
+@import 'includes/_mixins';
+@import 'blocks/_generic';
+
+// CSS MAIN BLOCKS
+
+@import 'blocks/_login';
+@import 'blocks/_header.scss';
+@import 'blocks/_footer.scss';
+@import 'blocks/_home';
+@import 'blocks/_library';
+@import 'blocks/_playlist';
+@import 'blocks/_queue';
+
+// CSS INNER BLOCKS
+
+@import 'blocks/_form';
+@import 'blocks/_form_buttons.scss';
+@import 'blocks/_header_search';
+@import 'blocks/_header_nav';
+@import 'blocks/_home_right';
+@import 'blocks/_home_left';
+@import 'blocks/_add_to_playlist';
+@import 'blocks/_library_asider';
+@import 'blocks/_playlist_header';
+@import 'blocks/_playlist_editer';
+@import 'blocks/_footer_more';
+@import 'blocks/_footer_seekbar';
+
+// CSS TRACKS
+
+@import 'blocks/_playlist_tracks';
+@import 'blocks/_common_track';
+@import 'blocks/_footer_track';
+
+
+

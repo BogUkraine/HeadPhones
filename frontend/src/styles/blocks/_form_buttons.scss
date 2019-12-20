@@ -1,0 +1,22 @@
+.form {
+
+    &__buttons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100px;
+
+        &_create {
+            margin-right: 15px;
+        }
+
+        &_enter {
+            margin-left: 15px;
+        }
+
+        &_back {
+            margin-right: 15px;
+        }
+    }
+ }
