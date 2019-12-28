@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import Home from "./Home/Home";
 import Library from "./Library/Library";
 import Playlist from "./Playlist/Playlist";
+import Settings from "./Settings/Settings";
 
 class Main extends Component {    
     render() {
@@ -13,6 +14,7 @@ class Main extends Component {
                 <Route path="/main/home" component={ Home }></Route>
                 <Route path="/main/library" component={ Library }></Route>
                 <Route path="/main/playlist" component={ Playlist }></Route>
+                <Route path="/main/settings" component={ Settings }></Route>
             </main>
         );
     }
