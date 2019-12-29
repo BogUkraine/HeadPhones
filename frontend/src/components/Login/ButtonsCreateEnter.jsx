@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
-import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
+
+import axios from 'axios';
+import { Redirect } from 'react-router-dom'
 
 import checkUser from '../../actions/checkUser';
 import addUser from '../../actions/addUser';
@@ -8,6 +10,10 @@ import addUser from '../../actions/addUser';
 class ButtonsCreateEnter extends Component {
     constructor(props){
         super(props);
+        this.state = {
+            toHome: false,
+        }
+
         this.handleClick = this.handleClick.bind(this);
         this.backClick = this.backClick.bind(this);
     }
@@ -35,18 +41,30 @@ class ButtonsCreateEnter extends Component {
                 fieldPasswordCreate.style.borderColor = "#ddd";
                 passwordWarning.style.display = "none";
 
-                this.props.user(fieldLoginCreate.value, fieldPasswordCreate.value);   
-                
-                if(this.props.checkedUser.user_id === "error"){
-                    event.preventDefault();
-                    alert("Wrong Login or Password");
-                }
-                else {
-                    this.props.addUser(fieldLoginCreate.value, fieldPasswordCreate.value);  
-                    console.log(this.props.checkedUser);
-                    console.log('ok))0)');
-                }
-
+                this.props.addUser(fieldLoginCreate.value, fieldPasswordCreate.value);
+                setTimeout(() => {
+                    this.props.user.then((res) => {
+                        console.log(res);
+                        if(res !== undefined){
+                            alert("This login is busy");
+                        }
+                        else {
+                            this.props.checkUser(fieldLoginCreate.value, fieldPasswordCreate.value);
+                            setTimeout(() => {
+                                this.props.user
+                                .then((res) => {
+                                    if(res !== undefined) {
+                                        this.props.changeUser(res);
+                                        this.setState({toHome: true})
+                                    }
+                                    else {
+                                        alert('Wrong password or login')
+                                        this.setState({toHome: false})
+                                    }})
+                            }, 300)
+                        }
+                    })
+                }, 300)
             }
             else {
                 fieldPasswordCreate.style.borderColor = "#dc0000";
@@ -64,21 +82,22 @@ class ButtonsCreateEnter extends Component {
     render() {
         return (
             <div className="form__buttons">
+                {(this.state.toHome) ? <Redirect to='/main/home' /> : null}
                 <button
                 className="form__buttons_create button"
                 value="Create account"
                 id="toLogin"
-                onClick={this.backClick}>Back to Login</button>
-                <NavLink to="/home">
-                    <button
-                    className="form__buttons_enter button"
-                    value="Enter"
-                    id="create"
-                    onClick={this.handleClick}
-                    >
+                onClick={this.backClick}>
+                    Back to Login
+                </button>
+
+                <button
+                className="form__buttons_enter button"
+                value="Enter"
+                id="create"
+                onClick={this.handleClick}>
                     Create
-                    </button>
-                </NavLink>
+                </button>
             </div>
         );
     }
@@ -87,10 +106,18 @@ class ButtonsCreateEnter extends Component {
 
 export default connect(
 	state => ({
-      checkedUser: state.checkUser
+        user: state.user
     }),
     {
-        user: checkUser,
+        checkUser: checkUser,
         addUser: addUser,
+        changeUser: (data) => ({
+            type: "CHANGE_USER",
+            payload: {
+                user_id: data.user_id,
+                user_login: data.user_login,
+                user_password: data.user_password,
+            }
+        })
 	}
 )(ButtonsCreateEnter);

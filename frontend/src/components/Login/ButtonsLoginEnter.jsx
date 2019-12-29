@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-//import { NavLink} from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom'
@@ -40,26 +39,19 @@ class ButtonsLoginEnter extends Component {
                 fieldPasswordEnter.style.borderColor = "#ddd";
                 passwordWarning.style.display = "none";
                
-                axios.get('http://localhost:3210/checkUser', {
-                    params: {
-                        user_login: fieldLoginEnter.value,
-                        user_password: fieldPasswordEnter.value
-                    }
-                    })
-                    .then( (response) => {
-                        if(response.data[0] !== undefined) {
-                            this.props.changeUser(response.data[0])
+                this.props.checkUser(fieldLoginEnter.value, fieldPasswordEnter.value);
+                setTimeout(() => {
+                    this.props.user
+                    .then((res) => {
+                        if(res !== undefined) {
+                            this.props.changeUser(res);
                             this.setState({toHome: true})
                         }
                         else {
                             alert('Wrong password or login')
                             this.setState({toHome: false})
-                        }
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    })
-
+                        }})
+                }, 300)
             }
             else {
                 fieldPasswordEnter.style.borderColor = "#dc0000";
@@ -101,10 +93,10 @@ class ButtonsLoginEnter extends Component {
 
 export default connect(
 	state => ({
-        checkedUser: state.user,
+        user: state.user,
 	}),
     {
-        user: checkUser,
+        checkUser: checkUser,
         changeUser: (data) => ({
             type: "CHANGE_USER",
             payload: {
