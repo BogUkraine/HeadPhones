@@ -18,11 +18,14 @@ class App extends Component {
 				<Route exact path="/login" component={ Login } />
 				{this.props.user.length !== 0
                 ?   <>
-						<Route path="/main" component={ Header }/>
-						<Route path="/main" component={ Main }/>
-						<Route path="/main" component={ Queue }/>
+						<Route path="/main" component={ Header } >
+							<Header/>
+							<Main/>
+							<Queue/>
+							<Footer />
+						</Route>
 						{/* <Visualizer /> */}
-						<Footer />
+						
 					</>
                 :   <div>You need to login!</div>
                 }

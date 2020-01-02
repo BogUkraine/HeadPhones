@@ -1,8 +1,9 @@
-var express = require('express');
-var app = express();
+const express = require('express');
+const app = express();
+
+const md5 = require('md5');
 const port = process.env.PORT || 3210;
 const cors = require('cors');
-
 const bodyParser = require("body-parser");
 const urlencodedParser = bodyParser.urlencoded({extended: false});
 
@@ -51,7 +52,7 @@ app.get("/tracks/joined", function(req, res){
 app.get("/checkUser", function(req, res){
 	const user = {
 		login: req.query.user_login,
-		password: req.query.user_password
+		password: md5(req.query.user_password),
 	}
 	
 	pool.query(
@@ -200,7 +201,7 @@ app.get("/pickedPlaylist", function(req, res){
 app.post("/addUser", function(req, res){
 	const user = {
 		login: req.body.user_login,
-		password: req.body.user_password
+		password: md5(req.body.user_password),
 	}
 	pool.query(
 		`INSERT INTO users (user_login, user_password)
