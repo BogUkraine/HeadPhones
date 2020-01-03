@@ -6,6 +6,7 @@ import Home from "./Home/Home";
 import Library from "./Library/Library";
 import Playlist from "./Playlist/Playlist";
 import Settings from "./Settings/Settings";
+import Search from "./Search/Search";
 
 class Main extends Component {    
     render() {
@@ -15,6 +16,7 @@ class Main extends Component {
                 <Route path="/main/library" component={ Library }></Route>
                 <Route path="/main/playlist" component={ Playlist }></Route>
                 <Route path="/main/settings" component={ Settings }></Route>
+                <Route path="/main/search" component={ Search }></Route>
             </main>
         );
     }

@@ -346,6 +346,30 @@ app.get("/current/playlist_data", function(req, res){
 	});
 });
 
+app.get("/search", function(req, res){
+	const track_name = req.query.track_name;
+	
+	pool.query(
+		`SELECT
+		t.track_id, t.track_name, t.track_time,
+		a.album_name, a.album_img,
+		s.singer_name,
+		g.genre_name
+		FROM tracks t
+		JOIN albums a USING(album_id)
+		JOIN singers s USING(singer_id)
+		JOIN genres g USING(genre_id)
+		WHERE track_name LIKE "%${track_name}%"
+		OR singer_name LIKE "%${track_name}%"
+		LIMIT 5`, track_name,
+		function(err, data) {
+		if(err) {
+			return console.log(err);
+		}
+		res.json(data);
+	});
+});
+
 app.get("/current/user", function(req, res){
 	const user_id = req.query.user_id;
 

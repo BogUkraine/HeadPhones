@@ -10,6 +10,7 @@ import queue from './queue';
 import checkerQueue from './checkerQueue';
 import playlistsCount from './playlistsCount';
 import footer from './footer';
+import search from './search';
 
 export default combineReducers({
     user,
@@ -22,4 +23,5 @@ export default combineReducers({
     currentTrack,
     checkerQueue,
     footer,
+    search,
 })
