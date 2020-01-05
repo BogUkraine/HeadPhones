@@ -23,17 +23,14 @@ class HeaderSearch extends Component {
             setTimeout(() => {
                 this.setState({toSongs: false}); 
             }, 500)
-        }
-        else {
-            
-        }        
+        }      
     }
 
     render() {
         return (
             <label className="header__search">
                 {this.state.toSongs ? <Redirect to="/main/search" /> : null}
-                <input className="header__field" type="text" id="search"/>
+                <input className="header__field" type="text" placeholder="Search" id="search"/>
                 <img className="header__search_image"
                 src={img} alt="search"
                 onClick={(e) => this.onSearch(e)}/>

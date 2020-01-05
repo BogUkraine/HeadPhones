@@ -9,7 +9,7 @@ import countOfTracks from '../../../functions/countOfTracks.js'
 class PlaylistDescription extends Component {
 
     render() {
-        var index = 0;
+        let index = 0;
         if(this.props.pickedPlaylist.length !== 0){
             for(let i = 0; i < this.props.playlists.length; i++){
                 if(this.props.playlists[i].playlist_id === this.props.pickedPlaylist[0].playlist_id){
@@ -40,7 +40,7 @@ class PlaylistDescription extends Component {
                     </span>
                 </div>
                 <PlaylistButtons />
-                <PlaylistEditer />
+                <PlaylistEditer index={index}/>
             </div>
         );
     }

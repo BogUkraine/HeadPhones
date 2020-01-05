@@ -33,7 +33,6 @@ class PlaylistList extends Component {
             main.style.height = "calc(100vh - 122px)";
             this.props.changeCurrentTrack(track, index);       
         }, 100)
-         
     }
     
     render() {
