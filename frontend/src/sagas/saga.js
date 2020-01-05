@@ -11,6 +11,8 @@ import addPlaylist from './addPlaylist';
 import fetchPlaylistsCount from './fetchPlaylistsCount';
 import changePlaylistName from './changePlaylistName';
 import addTrackToPlaylist from './addTrackToPlaylist';
+import fetchSearch from './fetchSearch';
+
 /*
 import {changeFooterSongPercent,
     changeFooterSongTime,
@@ -46,6 +48,10 @@ function* fetchPickedPlaylistWatcher() {
     yield takeLatest('FETCH_PICKED_PLAYLIST', fetchPickedPlaylist);
 }
 
+function* fetchSearchWatcher() {
+    yield takeLatest('FETCH_SEARCH', fetchSearch);
+}
+
 /*
 function* fetchFooterWatcher() {
     yield takeLatest('CHANGE_FOOTER_SONG_PERCENT', changeFooterSongPercent);
@@ -63,6 +69,7 @@ export default function* rootSaga() {
         fetchQuoteWatcher(),
         fetchTopTracksWathcer(),
         fetchPlaylistsCountWatcher(),
+        fetchSearchWatcher(),
         //fetchFooterWatcher(),
     ]);
 }

@@ -10,6 +10,7 @@ npm install --save-dev redux-devtools-extension
 npm install --save prop-types
 npm install react-slider
 npm install --save rc-slider
+npm install --save three
 
 when start programm:
 npm start

@@ -1,0 +1,11 @@
+.visualizer {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: 100vh;
+    bottom: 70px;
+    width: 100%;
+    height: calc(100vh - 122px);
+    transition: top 0.5s;
+    background: $background-color;
+}

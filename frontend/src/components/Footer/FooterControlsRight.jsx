@@ -7,24 +7,42 @@ class FooterControlsRight extends Component {
     constructor(props){
         super(props);
         this.state = {
-            isShownQueue: false
+            isShownQueue: false,
+            isShownVisualizer: false,
         }
         this.queueClick = this.queueClick.bind(this);
         this.repeatClick = this.repeatClick.bind(this);
         this.shuffleClick = this.shuffleClick.bind(this);
+        this.visualizerClick = this.visualizerClick.bind(this);
     }
 
-    queueClick() {
+    queueClick(event) {
         const queue = document.getElementById('queue');
         if(!this.state.isShownQueue){
+            event.target.style.color = '#8b8bc7';
             queue.style.display = "flex";
             queue.style.top = "52px";
             this.setState({isShownQueue: true});
         }
         else {
-            queue.style.display = "flex";
-            queue.style.top = "calc(100vh - 70px)";
+            event.target.style.color = '#ddd';
+            queue.style.top = "100vh";
             this.setState({isShownQueue: false});
+        }
+    }
+
+    visualizerClick(event) {
+        const visualizer = document.getElementById('visualizer');
+        if(!this.state.isShownVisualizer){
+            event.target.style.color = '#8b8bc7';
+            visualizer.style.display = "flex";
+            visualizer.style.top = "52px";
+            this.setState({isShownVisualizer: true});
+        }
+        else {
+            event.target.style.color = '#ddd';
+            visualizer.style.top = "100vh";
+            this.setState({isShownVisualizer: false});
         }
     }
 
@@ -64,6 +82,7 @@ class FooterControlsRight extends Component {
                 </div>
                 <span onClick={(event) => this.repeatClick(event)} className="fa fa-refresh" aria-hidden="true" id="repeating"></span>
                 <span onClick={(event) => this.shuffleClick(event)} className="fa fa-random" aria-hidden="true" id="shuffle"></span>
+                <span onClick={(event) => this.visualizerClick(event)} className="fa fa-chart-bar" aria-hidden="true"></span>
                 <span onClick={(event) => this.queueClick(event)} className="fa fa-caret-up" aria-hidden="true"></span>
             </div>
         )

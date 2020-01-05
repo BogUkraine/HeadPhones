@@ -1,8 +1,9 @@
-var express = require('express');
-var app = express();
+const express = require('express');
+const app = express();
+
+const md5 = require('md5');
 const port = process.env.PORT || 3210;
 const cors = require('cors');
-
 const bodyParser = require("body-parser");
 const urlencodedParser = bodyParser.urlencoded({extended: false});
 
@@ -51,7 +52,7 @@ app.get("/tracks/joined", function(req, res){
 app.get("/checkUser", function(req, res){
 	const user = {
 		login: req.query.user_login,
-		password: req.query.user_password
+		password: md5(req.query.user_password),
 	}
 	
 	pool.query(
@@ -64,6 +65,25 @@ app.get("/checkUser", function(req, res){
 			return console.log('it is err', err);
 		}
 		res.json(data);
+		console.log(data);
+	});
+});
+
+app.get("/checkLogin", function(req, res){
+	const user = {
+		login: req.query.user_login,
+	}
+	
+	pool.query(
+		`SELECT *
+		FROM users
+		WHERE users.user_login = '${user.login}'`, user,
+		function(err, data) {
+		if(err) {
+			return console.log('it is err', err);
+		}
+		res.json(data);
+		console.log(data);
 	});
 });
 
@@ -181,7 +201,7 @@ app.get("/pickedPlaylist", function(req, res){
 app.post("/addUser", function(req, res){
 	const user = {
 		login: req.body.user_login,
-		password: req.body.user_password
+		password: md5(req.body.user_password),
 	}
 	pool.query(
 		`INSERT INTO users (user_login, user_password)
@@ -196,11 +216,11 @@ app.post("/addUser", function(req, res){
 
 app.post("/addPlaylist", function(req, res){
 	const playlist = {
-		playlist_name: req.body.playlist_name,
 		user_id: req.body.user_id,
 	}
 
-	pool.query(`INSERT INTO playlists SET playlist_name = "${playlist.playlist_name}" AND user_id = ${playlist.user_id}`, playlist, function(err, data) {
+	pool.query(`INSERT INTO playlists (playlist_name, user_id)
+	VALUES ('playlist name', ${playlist.user_id});`, playlist, function(err, data) {
 		if(err) {
 			return console.log(err);
 		}
@@ -253,7 +273,7 @@ app.post('/addTrack', function(req, res){
 		info,
 		function(err, data) {
 		if(err) {
-			return console.log(err);
+			return console.log('error', err);
 		}
 		res.json(data);
 	});
@@ -263,7 +283,6 @@ app.post('/addTrack', function(req, res){
 
 app.get("/current/tracks", function(req, res){
 	const user = req.query.userInfo;
-	console.log("bd user:", req.query.userInfo);
 
 	pool.query(
 		`SELECT
@@ -319,6 +338,30 @@ app.get("/current/playlist_data", function(req, res){
 		JOIN singers s USING(singer_id)
 		JOIN genres g USING(genre_id)
 		WHERE playlist_id = ${playlist_id}`, playlist_id,
+		function(err, data) {
+		if(err) {
+			return console.log(err);
+		}
+		res.json(data);
+	});
+});
+
+app.get("/search", function(req, res){
+	const track_name = req.query.track_name;
+	
+	pool.query(
+		`SELECT
+		t.track_id, t.track_name, t.track_time,
+		a.album_name, a.album_img,
+		s.singer_name,
+		g.genre_name
+		FROM tracks t
+		JOIN albums a USING(album_id)
+		JOIN singers s USING(singer_id)
+		JOIN genres g USING(genre_id)
+		WHERE track_name LIKE "%${track_name}%"
+		OR singer_name LIKE "%${track_name}%"
+		LIMIT 5`, track_name,
 		function(err, data) {
 		if(err) {
 			return console.log(err);

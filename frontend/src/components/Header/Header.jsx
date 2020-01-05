@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Search from './HeaderSearch';
+import HeaderSearch from './HeaderSearch';
 import Nav from './HeaderNav';
 import Username from './HeaderUser';
 
@@ -14,7 +14,7 @@ const Header = () => {
                 <span className="header__title">HeadPhones</span>
             </div>
             <Nav />
-            <Search />
+            <HeaderSearch />
             <Username />
         </header>
 	);

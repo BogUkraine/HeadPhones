@@ -15,7 +15,6 @@ const HomeTrack = (({track, album_img, track_name, singer_name, album_name,
                     ? <span className="common__track_add_to_album"
                     onClick={(event) => toAlbum(event, track)}>+ album</span>
                     : null} 
-                    
                 </div>
                 <div className="common__track_description">
                     <span className="common__track_singer">{singer_name}</span>

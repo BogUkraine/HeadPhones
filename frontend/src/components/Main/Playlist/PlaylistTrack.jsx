@@ -1,7 +1,8 @@
 import React from 'react';
 import time from '../../../functions/time.js';
 
-const PlaylistTracks = (({track, change_track, track_name, singer_name, album_name, album_year, album_img, track_time, index}) => {
+const PlaylistTracks = (({track, change_track, track_name, singer_name,
+    album_name, album_year, album_img, track_time, index}) => {
     return (
         <div className="playlist__track" onClick={() => change_track(track, index)}>
             <div className="playlist__track_title">
