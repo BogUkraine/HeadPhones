@@ -41,58 +41,30 @@ class ButtonsCreateEnter extends Component {
                 fieldPasswordCreate.style.borderColor = "#ddd";
                 passwordWarning.style.display = "none";
 
-                axios.get('http://localhost:3210/checkLogin', {
-                    params: {
-                        user_login: fieldLoginCreate.value
-                    }
-                    })
-                    .then( (response) => {
-                        if(response.data[0] !== undefined) {
-                            alert('This login is busy, choose another one')
-                            this.setState({toHome: false})
-                        }
-                        else {
-                            axios.post('http://localhost:3210/addUser', {
-                                user_login: fieldLoginCreate.value,
-                                user_password: fieldPasswordCreate.value
-                            })
-                            .then( (response) => {
-                                
-                            })
-                            .catch(function (error) {
-                                console.log(error);
-                            });
-                            
-                        }
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    })
-
+                this.props.addUser(fieldLoginCreate.value, fieldPasswordCreate.value);
                 setTimeout(() => {
-                    axios.get('http://localhost:3210/checkUser', {
-                    params: {
-                        user_login: fieldLoginCreate.value,
-                        user_password: fieldPasswordCreate.value
-                    }
-                    })
-                    .then( (response) => {
-                        console.log('get', response.data)
-                        if(response.data[0] !== undefined) {
-                            this.props.changeUser(response.data[0])
-                            this.setState({toHome: true})
+                    this.props.user.then((res) => {
+                        console.log(res);
+                        if(res !== undefined){
+                            alert("This login is busy");
                         }
                         else {
-                            alert('Wrong password or login')
-                            this.setState({toHome: false})
+                            this.props.checkUser(fieldLoginCreate.value, fieldPasswordCreate.value);
+                            setTimeout(() => {
+                                this.props.user
+                                .then((res) => {
+                                    if(res !== undefined) {
+                                        this.props.changeUser(res);
+                                        this.setState({toHome: true})
+                                    }
+                                    else {
+                                        alert('Wrong password or login')
+                                        this.setState({toHome: false})
+                                    }})
+                            }, 300)
                         }
-                        console.log(this.state.toHome)
                     })
-                    .catch(function (error) {
-                        console.log(error);
-                    })
-                }, 500)
-
+                }, 300)
             }
             else {
                 fieldPasswordCreate.style.borderColor = "#dc0000";
@@ -134,10 +106,10 @@ class ButtonsCreateEnter extends Component {
 
 export default connect(
 	state => ({
-      checkedUser: state.checkUser
+        user: state.user
     }),
     {
-        user: checkUser,
+        checkUser: checkUser,
         addUser: addUser,
         changeUser: (data) => ({
             type: "CHANGE_USER",

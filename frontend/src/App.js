@@ -17,17 +17,17 @@ class App extends Component {
 			<BrowserRouter>
 				<Route exact path="/login" component={ Login } />
 				{this.props.user.length !== 0
-                ?   <>
-						<Route path="/main" component={ Header } >
-							<Header />
-							<Main />
-							<Queue />
-							<Visualizer />
-							<Footer />
-						</Route>						
-					</>
-                :   <div>You need to login!</div>
-                }
+         ?  <>
+              <Route path="/main" component={ Header } >
+                <Header />
+                <Main />
+                <Queue />
+                <Visualizer />
+                <Footer />
+              </Route>						
+				    </>
+         :   <div>You need to login!</div>
+         }
 			</BrowserRouter>
 		);
 	}
