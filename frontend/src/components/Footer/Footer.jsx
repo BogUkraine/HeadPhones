@@ -45,7 +45,8 @@ class Footer extends Component {
                 ref={this.reactAudioPlayer}
                 onTimeUpdate={this.onTimeUpdateListener}
                 onEnded={this.goNextSong}
-                autoPlay={true}
+				autoPlay={true}
+				id="player"
                 />
 
                 <FooterSeekbar

@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-//import Tricentric from './Tricentric';
-//import * as THREE from 'three'
+import Spiral from './Spiral';
+import Flower from './Flower';
+import Barred from './Barred';
+import Tricentric from './Tricentric';
+import * as THREE from 'three';
 
 class Visualizer extends Component {
     constructor(props) {
@@ -14,18 +17,37 @@ class Visualizer extends Component {
     }
   
     componentDidMount() {
+      // eslint-disable-next-line
+      const ctx = new AudioContext()
+      const player = document.getElementById('player')
+      const src = ctx.createMediaElementSource(player)
+      ctx.crossOrigin = 'anonymous'
+      //player.current.crossOrigin = 'anonymous'
+      let audioAnalyser = Object.assign({}, this.state.audioAnalyser)
+      audioAnalyser = ctx.createAnalyser()
+      src.connect(audioAnalyser)
+      audioAnalyser.fftSize = 32768
+      audioAnalyser.connect(ctx.destination)
+      this.setState({ audioAnalyser })
+
       // set up shared renderer and canvasRef
       const [width, height] = [this.canvasRef.current.clientWidth, this.canvasRef.current.clientHeight]
       this.renderer = new THREE.WebGLRenderer({ antialias: true })
       this.renderer.setSize(width, height)
-  
-      this.myAnimations = [
-        new Tricentric(this.renderer, this.canvasRef, this.props.audioAnalyser)
-      ]
-      this.myAnimations[this.state.visualizerNumber].init()
-  
-      window.addEventListener('resize', this.handleResize)
-      this.canvasRef.current.addEventListener('click', this.changeVisualizer)
+
+      setTimeout(() => {
+        this.myAnimations = [
+          new Barred(this.renderer, this.canvasRef, this.state.audioAnalyser),
+          new Spiral(this.renderer, this.canvasRef, this.state.audioAnalyser),
+          new Flower(this.renderer, this.canvasRef, this.state.audioAnalyser),
+          new Tricentric(this.renderer, this.canvasRef, this.state.audioAnalyser),
+        ]
+        this.myAnimations[this.state.visualizerNumber].init()
+    
+        window.addEventListener('resize', this.handleResize)
+        this.canvasRef.current.addEventListener('click', this.changeVisualizer)
+      }, 1000)
+      
     }
   
     componentWillUnmount() {
@@ -35,15 +57,15 @@ class Visualizer extends Component {
   
     handleResize() {
       let [width, height] = [this.canvasRef.current.clientWidth, this.canvasRef.current.clientHeight]
-      this.camera.aspect = width / height
-      this.camera.updateProjectionMatrix()
+      //this.camera.aspect = width / height
+      //this.camera.updateProjectionMatrix()
       this.renderer.setSize(width, height)
       this.canvasRef.current.appendChild(this.renderer.domElement)
     }
   
     render() {
       return (
-        <div className={this.props.styles.visualizer} ref={this.canvasRef} />
+        <div className="visualizer" ref={this.canvasRef} id="visualizer"/>
       )
     }
   

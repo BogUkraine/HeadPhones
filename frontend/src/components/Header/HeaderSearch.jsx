@@ -17,7 +17,7 @@ class HeaderSearch extends Component {
         event.stopPropagation();
         const searchField = document.getElementById('search');
 
-        if(searchField.value !== '') {
+        if(searchField.value !== '' || searchField.value.length >= 30) {
             this.props.fetchSearch(searchField.value);
             this.setState({toSongs: true});
             setTimeout(() => {

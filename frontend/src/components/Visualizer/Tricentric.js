@@ -2,7 +2,7 @@
 // https://github.com/tariqksoliman/Vissonance/
 
 import * as THREE from 'three'
-import { Spectrum } from './utils/Spectrum'
+import Spectrum from './utils/Spectrum'
 
 let fsize = 4096
 let numBars = 64

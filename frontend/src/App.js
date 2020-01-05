@@ -9,7 +9,7 @@ import Main from './components/Main/Main';
 import Footer from './components/Footer/Footer';
 import Login from './components/Login/Login';
 import Queue from './components/Queue/Queue';
-//import Visualizer from './components/Visualizer/Visualizer';
+import Visualizer from './components/Visualizer/Visualizer';
 
 class App extends Component {
 	render() {
@@ -19,13 +19,12 @@ class App extends Component {
 				{this.props.user.length !== 0
                 ?   <>
 						<Route path="/main" component={ Header } >
-							<Header/>
-							<Main/>
-							<Queue/>
+							<Header />
+							<Main />
+							<Queue />
+							<Visualizer />
 							<Footer />
-						</Route>
-						{/* <Visualizer /> */}
-						
+						</Route>						
 					</>
                 :   <div>You need to login!</div>
                 }
