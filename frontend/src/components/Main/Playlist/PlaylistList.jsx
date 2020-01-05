@@ -31,6 +31,8 @@ class PlaylistList extends Component {
             const main = document.getElementById("main");
             footer.style.display = "flex";
             main.style.height = "calc(100vh - 122px)";
+
+            this.props.changeIsPlaying(true);
             this.props.changeCurrentTrack(track, index);       
         }, 100)
     }
@@ -38,22 +40,24 @@ class PlaylistList extends Component {
     render() {
         let i = 0;
         return(
-            this.props.pickedPlaylist.map(( value, index ) => {
-                return (
-                    <PlaylistTrack
-                        track={value}
-                        track_name={value.track_name}
-                        album_name={value.album_name}
-                        singer_name={value.singer_name}
-                        album_year={value.album_year}
-                        album_img={value.album_img}
-                        track_time={value.track_time}
-                        change_track={this.changeTrack.bind(this)}
-                        index={index}
-                        key={i++}
-                    />
-                );
-            })
+            <div className="playlist__list">
+                {this.props.pickedPlaylist.map(( value, index ) => {
+                    return (
+                        <PlaylistTrack
+                            track={value}
+                            track_name={value.track_name}
+                            album_name={value.album_name}
+                            singer_name={value.singer_name}
+                            album_year={value.album_year}
+                            album_img={value.album_img}
+                            track_time={value.track_time}
+                            change_track={this.changeTrack.bind(this)}
+                            index={index}
+                            key={i++}
+                        />
+                    );
+                })}
+            </div>
         )
     }
 }
@@ -89,5 +93,9 @@ export default connect(
             type: "COPY_TRACKS",
             payload: data
         }),
+        changeIsPlaying: (data) => ({
+            type: "CHANGE_IS_PLAYING",
+            payload: data,
+        })
     }
 )(PlaylistList);

@@ -17,6 +17,7 @@ class PlaylistButtons extends Component {
         main.style.height = "calc(100vh - 122px)";
         
         setTimeout(() => {
+            this.props.changeIsPlaying(true);
             this.props.changeCurrentTrack(this.props.queue[0], 0);
         }, 1000)
     }
@@ -56,5 +57,9 @@ export default connect(
             type: "COPY_TRACKS",
             payload: data
         }),
+        changeIsPlaying: (data) => ({
+            type: "CHANGE_IS_PLAYING",
+            payload: data,
+        })
     }
   )(PlaylistButtons);

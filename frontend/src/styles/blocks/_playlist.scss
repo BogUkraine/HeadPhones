@@ -1,8 +1,6 @@
 .playlist {
-    display: flex;
-    flex-wrap: wrap;
-    margin-bottom: 70px;
     height: 100%;
+    margin-bottom: 70px;
     overflow-y: auto;
 
     &__header {
@@ -25,5 +23,11 @@
         &_buttons {
             margin: 50px 0;
         }
+    }
+
+    &__list {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
     }
 }
