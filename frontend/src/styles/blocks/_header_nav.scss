@@ -75,5 +75,9 @@
             border-top: 2px solid $border-submenu-item-color;
         }
     }
+
+    &__settings {
+        color: $text-color !important;
+    }
 }
 
